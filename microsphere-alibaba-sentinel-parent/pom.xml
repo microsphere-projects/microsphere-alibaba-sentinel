@@ -20,11 +20,11 @@
 
     <properties>
         <!-- BOM versions -->
-        <microsphere-spring-cloud.version>0.2.12</microsphere-spring-cloud.version>
-        <microsphere-alibaba-druid.version>0.2.10</microsphere-alibaba-druid.version>
-        <microsphere-mybatis.version>0.2.6</microsphere-mybatis.version>
-        <microsphere-hibernate.version>0.2.2</microsphere-hibernate.version>
-        <microsphere-redis.version>0.2.5</microsphere-redis.version>
+        <microsphere-spring-cloud.version>0.2.14</microsphere-spring-cloud.version>
+        <microsphere-alibaba-druid.version>0.2.13</microsphere-alibaba-druid.version>
+        <microsphere-mybatis.version>0.2.7</microsphere-mybatis.version>
+        <microsphere-hibernate.version>0.2.3</microsphere-hibernate.version>
+        <microsphere-redis.version>0.2.6</microsphere-redis.version>
         <!-- Third-party versions -->
         <sentinel.version>1.8.10</sentinel.version>
         <fastjson.version>2.0.62</fastjson.version>
