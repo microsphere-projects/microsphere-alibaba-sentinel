@@ -1,2 +1,2 @@
-common.io.microsphere.alibaba.sentinel.SentinelPlugin=\
-spring.redis.io.microsphere.alibaba.sentinel.SentinelRedisCommandInterceptor
+io.microsphere.redis.spring.interceptor.RedisConnectionInterceptor=\
+io.microsphere.alibaba.sentinel.redis.spring.SentinelRedisCommandInterceptor
