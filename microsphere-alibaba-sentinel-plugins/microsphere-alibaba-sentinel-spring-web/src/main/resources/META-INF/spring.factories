@@ -1,0 +1,2 @@
+io.microsphere.spring.web.method.support.HandlerMethodInterceptor=\
+io.microsphere.alibaba.sentinel.spring.web.SentinelHandlerMethodInterceptor
