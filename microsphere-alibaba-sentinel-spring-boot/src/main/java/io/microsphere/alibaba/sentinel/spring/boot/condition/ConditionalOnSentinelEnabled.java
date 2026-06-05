@@ -21,12 +21,13 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import static io.microsphere.constants.PropertyConstants.ENABLED_PROPERTY_NAME;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Alibaba Sentinel Spring Boot Condition
@@ -35,8 +36,8 @@ import static io.microsphere.constants.PropertyConstants.ENABLED_PROPERTY_NAME;
  * @see SentinelAutoConfiguration
  * @since 1.0.0
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RUNTIME)
+@Target({TYPE, METHOD})
 @Documented
 @ConditionalOnProperty(prefix = ConditionalOnSentinelEnabled.PREFIX, name = ENABLED_PROPERTY_NAME, matchIfMissing = true)
 @ConditionalOnClass(name = {

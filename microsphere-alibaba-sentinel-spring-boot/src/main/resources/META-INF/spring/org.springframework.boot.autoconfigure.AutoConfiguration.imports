@@ -1,1 +1,1 @@
-autoconfigure.boot.spring.io.microsphere.alibaba.sentinel.SentinelAutoConfiguration
+io.microsphere.alibaba.sentinel.spring.boot.autoconfigure.SentinelAutoConfiguration
