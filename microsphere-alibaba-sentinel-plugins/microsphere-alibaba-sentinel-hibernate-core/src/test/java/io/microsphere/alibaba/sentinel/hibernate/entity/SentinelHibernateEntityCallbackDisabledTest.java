@@ -21,7 +21,7 @@ import io.microsphere.hibernate.test.AbstractHibernateH2Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 
-import static io.microsphere.alibaba.sentinel.hibernate.Constants.ENABLED_PROPERTY_NAME;
+import static io.microsphere.alibaba.sentinel.hibernate.SentinelHibernateConstants.ENABLED_PROPERTY_NAME;
 import static java.lang.System.setProperty;
 
 /**

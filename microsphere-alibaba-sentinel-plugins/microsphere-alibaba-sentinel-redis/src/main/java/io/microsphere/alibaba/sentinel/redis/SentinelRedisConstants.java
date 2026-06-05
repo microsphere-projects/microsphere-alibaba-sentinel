@@ -15,45 +15,49 @@
  * limitations under the License.
  */
 
-package io.microsphere.alibaba.sentinel.hibernate;
+package io.microsphere.alibaba.sentinel.redis;
 
 import io.microsphere.annotation.ConfigurationProperty;
 import io.microsphere.constants.PropertyConstants;
 
+import static io.microsphere.annotation.ConfigurationProperty.APPLICATION_SOURCE;
 import static io.microsphere.annotation.ConfigurationProperty.SYSTEM_PROPERTIES_SOURCE;
 import static io.microsphere.constants.SymbolConstants.DOT;
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.PROPERTY_NAME_PREFIX;
 
 /**
- * The interface to declare the constants of Hibernate
+ * The interface to declare the constants of Redis
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since 1.0.0
  */
-public interface Constants {
+public interface SentinelRedisConstants {
 
     /**
-     * The plugin name of Sentinel x Hibernate
+     * The plugin name of Sentinel x Redis
      */
-    String PLUGIN_NAME = "hibernate";
+    String PLUGIN_NAME = "redis";
 
     /**
-     * The default context name of Sentinel x Hibernate
+     * The default context name of Sentinel x Redis
      */
-    String DEFAULT_CONTEXT_NAME = "microsphere_sentinel_hibernate_context";
+    String DEFAULT_CONTEXT_NAME = "microsphere_sentinel_redis_context";
 
     /**
-     * The default origin of Sentinel x Hibernate
+     * The default origin of Sentinel x Redis
      */
-    String DEFAULT_ORIGIN = "SessionFactory";
+    String DEFAULT_ORIGIN = "RedisConnection";
 
     /**
-     * The property name of the plugin of Sentinel x Hibernate enabled
+     * The property name of the plugin of Sentinel x Redis enabled
      */
     @ConfigurationProperty(
             type = boolean.class,
             defaultValue = "true",
-            source = SYSTEM_PROPERTIES_SOURCE
+            source = {
+                    SYSTEM_PROPERTIES_SOURCE,
+                    APPLICATION_SOURCE
+            }
     )
     String ENABLED_PROPERTY_NAME = PROPERTY_NAME_PREFIX + PLUGIN_NAME + DOT + PropertyConstants.ENABLED_PROPERTY_NAME;
 

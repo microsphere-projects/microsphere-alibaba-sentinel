@@ -20,18 +20,18 @@ package io.microsphere.alibaba.sentinel.spring.web;
 import io.microsphere.annotation.ConfigurationProperty;
 import io.microsphere.constants.PropertyConstants;
 
+import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.PROPERTY_NAME_PREFIX;
 import static io.microsphere.annotation.ConfigurationProperty.APPLICATION_SOURCE;
 import static io.microsphere.annotation.ConfigurationProperty.SYSTEM_PROPERTIES_SOURCE;
 import static io.microsphere.constants.SymbolConstants.DOT;
-import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.PROPERTY_NAME_PREFIX;
 
 /**
- * The interface to declare the constants of Spring Web
+ * The interface to declare the constants of Sentinel x Spring Web
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since 1.0.0
  */
-public interface Constants {
+public interface SentinelSpringWebConstants {
 
     /**
      * The plugin name of Sentinel x Spring Web

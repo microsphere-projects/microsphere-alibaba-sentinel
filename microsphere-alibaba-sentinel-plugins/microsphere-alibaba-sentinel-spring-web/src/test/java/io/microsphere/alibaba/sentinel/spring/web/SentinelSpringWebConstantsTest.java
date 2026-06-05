@@ -15,32 +15,32 @@
  * limitations under the License.
  */
 
-package io.microsphere.alibaba.sentinel.p6spy;
+package io.microsphere.alibaba.sentinel.spring.web;
 
 import org.junit.jupiter.api.Test;
 
-import static io.microsphere.alibaba.sentinel.p6spy.Constants.DEFAULT_CONTEXT_NAME;
-import static io.microsphere.alibaba.sentinel.p6spy.Constants.DEFAULT_ORIGIN;
-import static io.microsphere.alibaba.sentinel.p6spy.Constants.ENABLED_PROPERTY_NAME;
-import static io.microsphere.alibaba.sentinel.p6spy.Constants.PLUGIN_NAME;
 import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getPluginEnabledPropertyName;
+import static io.microsphere.alibaba.sentinel.spring.web.SentinelSpringWebConstants.DEFAULT_CONTEXT_NAME;
+import static io.microsphere.alibaba.sentinel.spring.web.SentinelSpringWebConstants.DEFAULT_ORIGIN;
+import static io.microsphere.alibaba.sentinel.spring.web.SentinelSpringWebConstants.ENABLED_PROPERTY_NAME;
+import static io.microsphere.alibaba.sentinel.spring.web.SentinelSpringWebConstants.PLUGIN_NAME;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * {@link Constants} Test
+ * {@link SentinelSpringWebConstants} Test
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
- * @see Constants
+ * @see SentinelSpringWebConstants
  * @since 1.0.0
  */
-class ConstantsTest {
+class SentinelSpringWebConstantsTest {
 
     @Test
     void testConstants() {
-        assertEquals("p6spy", PLUGIN_NAME);
-        assertEquals("microsphere_sentinel_p6spy_context", DEFAULT_CONTEXT_NAME);
-        assertEquals("Statement", DEFAULT_ORIGIN);
-        assertEquals("microsphere.sentinel.p6spy.enabled", ENABLED_PROPERTY_NAME);
+        assertEquals("spring-web", PLUGIN_NAME);
+        assertEquals("microsphere_sentinel_spring_web_context", DEFAULT_CONTEXT_NAME);
+        assertEquals("HandlerMethod", DEFAULT_ORIGIN);
+        assertEquals("microsphere.sentinel.spring-web.enabled", ENABLED_PROPERTY_NAME);
         assertEquals(getPluginEnabledPropertyName(PLUGIN_NAME), ENABLED_PROPERTY_NAME);
     }
 }

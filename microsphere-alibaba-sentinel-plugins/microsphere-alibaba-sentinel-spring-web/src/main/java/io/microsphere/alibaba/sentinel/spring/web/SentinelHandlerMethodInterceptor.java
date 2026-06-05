@@ -42,9 +42,9 @@ import static io.microsphere.collection.MapUtils.newFixedHashMap;
 import static io.microsphere.logging.LoggerFactory.getLogger;
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.DEFAULT_PRIORITY;
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.SENTINEL_CONTEXT_ATTRIBUTE_NAME;
-import static io.microsphere.alibaba.sentinel.spring.web.Constants.DEFAULT_CONTEXT_NAME;
-import static io.microsphere.alibaba.sentinel.spring.web.Constants.DEFAULT_ORIGIN;
-import static io.microsphere.alibaba.sentinel.spring.web.Constants.PLUGIN_NAME;
+import static io.microsphere.alibaba.sentinel.spring.web.SentinelSpringWebConstants.DEFAULT_CONTEXT_NAME;
+import static io.microsphere.alibaba.sentinel.spring.web.SentinelSpringWebConstants.DEFAULT_ORIGIN;
+import static io.microsphere.alibaba.sentinel.spring.web.SentinelSpringWebConstants.PLUGIN_NAME;
 import static io.microsphere.spring.web.util.WebScope.REQUEST;
 
 /**

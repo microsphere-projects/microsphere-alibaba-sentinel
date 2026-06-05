@@ -21,9 +21,9 @@ import com.alibaba.druid.pool.DruidDataSource;
 import io.microsphere.alibaba.druid.test.AbstractAlibabaDruidTest;
 import org.junit.jupiter.api.Test;
 
-import static io.microsphere.alibaba.sentinel.p6spy.Constants.DEFAULT_CONTEXT_NAME;
-import static io.microsphere.alibaba.sentinel.p6spy.Constants.DEFAULT_ORIGIN;
-import static io.microsphere.alibaba.sentinel.p6spy.Constants.PLUGIN_NAME;
+import static io.microsphere.alibaba.sentinel.p6spy.SentinelP6SpyConstants.DEFAULT_CONTEXT_NAME;
+import static io.microsphere.alibaba.sentinel.p6spy.SentinelP6SpyConstants.DEFAULT_ORIGIN;
+import static io.microsphere.alibaba.sentinel.p6spy.SentinelP6SpyConstants.PLUGIN_NAME;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

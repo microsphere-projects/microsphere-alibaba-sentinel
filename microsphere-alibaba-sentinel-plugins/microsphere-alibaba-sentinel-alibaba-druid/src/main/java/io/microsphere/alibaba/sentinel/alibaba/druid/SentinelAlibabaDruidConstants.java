@@ -15,40 +15,40 @@
  * limitations under the License.
  */
 
-package io.microsphere.alibaba.sentinel.mybatis;
+package io.microsphere.alibaba.sentinel.alibaba.druid;
 
 import io.microsphere.annotation.ConfigurationProperty;
 import io.microsphere.constants.PropertyConstants;
 
+import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.PROPERTY_NAME_PREFIX;
 import static io.microsphere.annotation.ConfigurationProperty.SYSTEM_PROPERTIES_SOURCE;
 import static io.microsphere.constants.SymbolConstants.DOT;
-import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.PROPERTY_NAME_PREFIX;
 
 /**
- * The interface to declare the constants of MyBatis
+ * The interface to declare the constants of Sentinel x Alibaba Druid
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since 1.0.0
  */
-public interface Constants {
+public interface SentinelAlibabaDruidConstants {
 
     /**
-     * The plugin name of Sentinel x MyBatis
+     * The plugin name of Sentinel x Alibaba Druid
      */
-    String PLUGIN_NAME = "mybatis";
+    String PLUGIN_NAME = "alibaba-druid";
 
     /**
-     * The default context name of Sentinel x MyBatis
+     * The default context name of Sentinel x Alibaba Druid
      */
-    String DEFAULT_CONTEXT_NAME = "microsphere_sentinel_mybatis_context";
+    String DEFAULT_CONTEXT_NAME = "microsphere_sentinel_alibaba_druid_context";
 
     /**
-     * The default origin of Sentinel x MyBatis
+     * The default origin of Sentinel x Alibaba Druid
      */
-    String DEFAULT_ORIGIN = "Executor";
+    String DEFAULT_ORIGIN = "Filter";
 
     /**
-     * The property name of the plugin of Sentinel x MyBatis enabled
+     * The property name of the plugin of Sentinel x Alibaba Druid enabled
      */
     @ConfigurationProperty(
             type = boolean.class,
@@ -56,5 +56,4 @@ public interface Constants {
             source = SYSTEM_PROPERTIES_SOURCE
     )
     String ENABLED_PROPERTY_NAME = PROPERTY_NAME_PREFIX + PLUGIN_NAME + DOT + PropertyConstants.ENABLED_PROPERTY_NAME;
-
 }

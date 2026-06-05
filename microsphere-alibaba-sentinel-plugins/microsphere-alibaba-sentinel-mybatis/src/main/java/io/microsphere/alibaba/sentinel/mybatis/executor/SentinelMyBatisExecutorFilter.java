@@ -33,9 +33,9 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import static com.alibaba.csp.sentinel.ResourceTypeConstants.COMMON_DB_SQL;
-import static io.microsphere.alibaba.sentinel.mybatis.Constants.DEFAULT_CONTEXT_NAME;
-import static io.microsphere.alibaba.sentinel.mybatis.Constants.DEFAULT_ORIGIN;
-import static io.microsphere.alibaba.sentinel.mybatis.Constants.PLUGIN_NAME;
+import static io.microsphere.alibaba.sentinel.mybatis.SentinelMyBatisConstants.DEFAULT_CONTEXT_NAME;
+import static io.microsphere.alibaba.sentinel.mybatis.SentinelMyBatisConstants.DEFAULT_ORIGIN;
+import static io.microsphere.alibaba.sentinel.mybatis.SentinelMyBatisConstants.PLUGIN_NAME;
 import static io.microsphere.util.ExceptionUtils.throwTarget;
 
 /**

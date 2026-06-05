@@ -36,9 +36,9 @@ import static io.microsphere.logging.LoggerFactory.getLogger;
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.DEFAULT_PRIORITY;
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.SENTINEL_CONTEXT_ATTRIBUTE_NAME;
 import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.buildResourceName;
-import static io.microsphere.alibaba.sentinel.redis.Constants.DEFAULT_CONTEXT_NAME;
-import static io.microsphere.alibaba.sentinel.redis.Constants.DEFAULT_ORIGIN;
-import static io.microsphere.alibaba.sentinel.redis.Constants.PLUGIN_NAME;
+import static io.microsphere.alibaba.sentinel.redis.SentinelRedisConstants.DEFAULT_CONTEXT_NAME;
+import static io.microsphere.alibaba.sentinel.redis.SentinelRedisConstants.DEFAULT_ORIGIN;
+import static io.microsphere.alibaba.sentinel.redis.SentinelRedisConstants.PLUGIN_NAME;
 import static org.springframework.util.ClassUtils.getAllInterfacesForClass;
 
 /**

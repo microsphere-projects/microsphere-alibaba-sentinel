@@ -15,40 +15,40 @@
  * limitations under the License.
  */
 
-package io.microsphere.alibaba.sentinel.alibaba.druid;
+package io.microsphere.alibaba.sentinel.hibernate;
 
 import io.microsphere.annotation.ConfigurationProperty;
 import io.microsphere.constants.PropertyConstants;
 
+import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.PROPERTY_NAME_PREFIX;
 import static io.microsphere.annotation.ConfigurationProperty.SYSTEM_PROPERTIES_SOURCE;
 import static io.microsphere.constants.SymbolConstants.DOT;
-import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.PROPERTY_NAME_PREFIX;
 
 /**
- * The interface to declare the constants of Alibaba Druid
+ * The interface to declare the constants of Sentinel x Hibernate
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since 1.0.0
  */
-public interface Constants {
+public interface SentinelHibernateConstants {
 
     /**
-     * The plugin name of Sentinel x Alibaba Druid
+     * The plugin name of Sentinel x Hibernate
      */
-    String PLUGIN_NAME = "alibaba-druid";
+    String PLUGIN_NAME = "hibernate";
 
     /**
-     * The default context name of Sentinel x Alibaba Druid
+     * The default context name of Sentinel x Hibernate
      */
-    String DEFAULT_CONTEXT_NAME = "microsphere_sentinel_alibaba_druid_context";
+    String DEFAULT_CONTEXT_NAME = "microsphere_sentinel_hibernate_context";
 
     /**
-     * The default origin of Sentinel x Alibaba Druid
+     * The default origin of Sentinel x Hibernate
      */
-    String DEFAULT_ORIGIN = "Filter";
+    String DEFAULT_ORIGIN = "SessionFactory";
 
     /**
-     * The property name of the plugin of Sentinel x Alibaba Druid enabled
+     * The property name of the plugin of Sentinel x Hibernate enabled
      */
     @ConfigurationProperty(
             type = boolean.class,
@@ -56,4 +56,5 @@ public interface Constants {
             source = SYSTEM_PROPERTIES_SOURCE
     )
     String ENABLED_PROPERTY_NAME = PROPERTY_NAME_PREFIX + PLUGIN_NAME + DOT + PropertyConstants.ENABLED_PROPERTY_NAME;
+
 }

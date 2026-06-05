@@ -30,9 +30,9 @@ import io.microsphere.alibaba.sentinel.common.SimpleSentinelPlugin;
 
 import static com.alibaba.csp.sentinel.EntryType.IN;
 import static com.alibaba.csp.sentinel.ResourceTypeConstants.COMMON_DB_SQL;
-import static io.microsphere.alibaba.sentinel.alibaba.druid.Constants.DEFAULT_CONTEXT_NAME;
-import static io.microsphere.alibaba.sentinel.alibaba.druid.Constants.DEFAULT_ORIGIN;
-import static io.microsphere.alibaba.sentinel.alibaba.druid.Constants.PLUGIN_NAME;
+import static io.microsphere.alibaba.sentinel.alibaba.druid.SentinelAlibabaDruidConstants.DEFAULT_CONTEXT_NAME;
+import static io.microsphere.alibaba.sentinel.alibaba.druid.SentinelAlibabaDruidConstants.DEFAULT_ORIGIN;
+import static io.microsphere.alibaba.sentinel.alibaba.druid.SentinelAlibabaDruidConstants.PLUGIN_NAME;
 import static io.microsphere.alibaba.sentinel.common.SentinelContext.doInContext;
 import static io.microsphere.alibaba.sentinel.common.SentinelPlugin.install;
 
@@ -45,17 +45,17 @@ import static io.microsphere.alibaba.sentinel.common.SentinelPlugin.install;
  * @since 1.0.0
  */
 @AutoLoad
-public class SentinelDruidFilter extends AbstractStatementFilter implements SentinelPlugin {
+public class SentinelAlibabaDruidFilter extends AbstractStatementFilter implements SentinelPlugin {
 
     private final SentinelPlugin delegate;
 
     private final SentinelOperations sentinelOperations;
 
-    public SentinelDruidFilter() {
+    public SentinelAlibabaDruidFilter() {
         this(DEFAULT_CONTEXT_NAME, DEFAULT_ORIGIN);
     }
 
-    public SentinelDruidFilter(String contextName, String origin) {
+    public SentinelAlibabaDruidFilter(String contextName, String origin) {
         this.delegate = new SimpleSentinelPlugin(PLUGIN_NAME, contextName, origin, COMMON_DB_SQL, IN, false);
         this.sentinelOperations = new SentinelTemplate(getResourceType(), getTrafficType());
         install(this);

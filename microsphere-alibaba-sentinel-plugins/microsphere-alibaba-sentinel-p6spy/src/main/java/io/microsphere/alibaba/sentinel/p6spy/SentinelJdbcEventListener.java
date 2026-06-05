@@ -36,9 +36,9 @@ import static io.microsphere.lang.function.ThrowableAction.execute;
 import static io.microsphere.logging.LoggerFactory.getLogger;
 import static io.microsphere.alibaba.sentinel.common.SentinelContext.doInContext;
 import static io.microsphere.alibaba.sentinel.common.SentinelPlugin.install;
-import static io.microsphere.alibaba.sentinel.p6spy.Constants.DEFAULT_CONTEXT_NAME;
-import static io.microsphere.alibaba.sentinel.p6spy.Constants.DEFAULT_ORIGIN;
-import static io.microsphere.alibaba.sentinel.p6spy.Constants.PLUGIN_NAME;
+import static io.microsphere.alibaba.sentinel.p6spy.SentinelP6SpyConstants.DEFAULT_CONTEXT_NAME;
+import static io.microsphere.alibaba.sentinel.p6spy.SentinelP6SpyConstants.DEFAULT_ORIGIN;
+import static io.microsphere.alibaba.sentinel.p6spy.SentinelP6SpyConstants.PLUGIN_NAME;
 
 /**
  * P6Spy {@link JdbcEventListener} based on Alibaba Sentinel

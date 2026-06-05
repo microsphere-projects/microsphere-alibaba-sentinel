@@ -15,32 +15,32 @@
  * limitations under the License.
  */
 
-package io.microsphere.alibaba.sentinel.redis;
+package io.microsphere.alibaba.sentinel.hibernate;
 
 import org.junit.jupiter.api.Test;
 
+import static io.microsphere.alibaba.sentinel.hibernate.SentinelHibernateConstants.DEFAULT_CONTEXT_NAME;
+import static io.microsphere.alibaba.sentinel.hibernate.SentinelHibernateConstants.DEFAULT_ORIGIN;
+import static io.microsphere.alibaba.sentinel.hibernate.SentinelHibernateConstants.ENABLED_PROPERTY_NAME;
+import static io.microsphere.alibaba.sentinel.hibernate.SentinelHibernateConstants.PLUGIN_NAME;
 import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getPluginEnabledPropertyName;
-import static io.microsphere.alibaba.sentinel.redis.Constants.DEFAULT_CONTEXT_NAME;
-import static io.microsphere.alibaba.sentinel.redis.Constants.DEFAULT_ORIGIN;
-import static io.microsphere.alibaba.sentinel.redis.Constants.ENABLED_PROPERTY_NAME;
-import static io.microsphere.alibaba.sentinel.redis.Constants.PLUGIN_NAME;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * {@link Constants} Test
+ * {@link SentinelHibernateConstants} Test
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
- * @see Constants
+ * @see SentinelHibernateConstants
  * @since 1.0.0
  */
-class ConstantsTest {
+class SentinelHibernateConstantsTest {
 
     @Test
     void testConstants() {
-        assertEquals("redis", PLUGIN_NAME);
-        assertEquals("microsphere_sentinel_redis_context", DEFAULT_CONTEXT_NAME);
-        assertEquals("RedisConnection", DEFAULT_ORIGIN);
-        assertEquals("microsphere.sentinel.redis.enabled", ENABLED_PROPERTY_NAME);
+        assertEquals("hibernate", PLUGIN_NAME);
+        assertEquals("microsphere_sentinel_hibernate_context", DEFAULT_CONTEXT_NAME);
+        assertEquals("SessionFactory", DEFAULT_ORIGIN);
+        assertEquals("microsphere.sentinel.hibernate.enabled", ENABLED_PROPERTY_NAME);
         assertEquals(getPluginEnabledPropertyName(PLUGIN_NAME), ENABLED_PROPERTY_NAME);
     }
 }

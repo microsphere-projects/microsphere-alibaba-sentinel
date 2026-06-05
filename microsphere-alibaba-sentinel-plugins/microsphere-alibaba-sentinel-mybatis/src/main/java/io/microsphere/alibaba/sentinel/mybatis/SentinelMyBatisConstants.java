@@ -15,49 +15,45 @@
  * limitations under the License.
  */
 
-package io.microsphere.alibaba.sentinel.redis;
+package io.microsphere.alibaba.sentinel.mybatis;
 
 import io.microsphere.annotation.ConfigurationProperty;
 import io.microsphere.constants.PropertyConstants;
 
-import static io.microsphere.annotation.ConfigurationProperty.APPLICATION_SOURCE;
+import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.PROPERTY_NAME_PREFIX;
 import static io.microsphere.annotation.ConfigurationProperty.SYSTEM_PROPERTIES_SOURCE;
 import static io.microsphere.constants.SymbolConstants.DOT;
-import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.PROPERTY_NAME_PREFIX;
 
 /**
- * The interface to declare the constants of Redis
+ * The interface to declare the constants of Sentinel x MyBatis
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since 1.0.0
  */
-public interface Constants {
+public interface SentinelMyBatisConstants {
 
     /**
-     * The plugin name of Sentinel x Redis
+     * The plugin name of Sentinel x MyBatis
      */
-    String PLUGIN_NAME = "redis";
+    String PLUGIN_NAME = "mybatis";
 
     /**
-     * The default context name of Sentinel x Redis
+     * The default context name of Sentinel x MyBatis
      */
-    String DEFAULT_CONTEXT_NAME = "microsphere_sentinel_redis_context";
+    String DEFAULT_CONTEXT_NAME = "microsphere_sentinel_mybatis_context";
 
     /**
-     * The default origin of Sentinel x Redis
+     * The default origin of Sentinel x MyBatis
      */
-    String DEFAULT_ORIGIN = "RedisConnection";
+    String DEFAULT_ORIGIN = "Executor";
 
     /**
-     * The property name of the plugin of Sentinel x Redis enabled
+     * The property name of the plugin of Sentinel x MyBatis enabled
      */
     @ConfigurationProperty(
             type = boolean.class,
             defaultValue = "true",
-            source = {
-                    SYSTEM_PROPERTIES_SOURCE,
-                    APPLICATION_SOURCE
-            }
+            source = SYSTEM_PROPERTIES_SOURCE
     )
     String ENABLED_PROPERTY_NAME = PROPERTY_NAME_PREFIX + PLUGIN_NAME + DOT + PropertyConstants.ENABLED_PROPERTY_NAME;
 

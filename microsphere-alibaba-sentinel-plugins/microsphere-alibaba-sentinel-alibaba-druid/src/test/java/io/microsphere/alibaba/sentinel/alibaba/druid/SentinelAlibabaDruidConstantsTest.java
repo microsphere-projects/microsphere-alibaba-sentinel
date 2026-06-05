@@ -17,46 +17,30 @@
 
 package io.microsphere.alibaba.sentinel.alibaba.druid;
 
-import com.alibaba.druid.filter.Filter;
-import com.alibaba.druid.pool.DruidDataSource;
-import io.microsphere.alibaba.druid.test.AbstractAlibabaDruidTest;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static io.microsphere.alibaba.sentinel.alibaba.druid.Constants.PLUGIN_NAME;
+import static io.microsphere.alibaba.sentinel.alibaba.druid.SentinelAlibabaDruidConstants.DEFAULT_CONTEXT_NAME;
+import static io.microsphere.alibaba.sentinel.alibaba.druid.SentinelAlibabaDruidConstants.DEFAULT_ORIGIN;
+import static io.microsphere.alibaba.sentinel.alibaba.druid.SentinelAlibabaDruidConstants.ENABLED_PROPERTY_NAME;
+import static io.microsphere.alibaba.sentinel.alibaba.druid.SentinelAlibabaDruidConstants.PLUGIN_NAME;
+import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getPluginEnabledPropertyName;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * {@link SentinelDruidFilter} Testt
+ * {@link SentinelAlibabaDruidConstants} Test
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
- * @see SentinelDruidFilter
- * @see AbstractAlibabaDruidTest
+ * @see SentinelAlibabaDruidConstants
  * @since 1.0.0
  */
-class SentinelDruidFilterTest extends AbstractAlibabaDruidTest {
+class SentinelAlibabaDruidConstantsTest {
 
     @Test
-    void testEnable() throws Throwable {
-        setEnable(true);
-        super.test();
-    }
-
-    @Test
-    void testDisable() throws Throwable {
-        setEnable(false);
-        super.test();
-    }
-
-    void setEnable(boolean enabled) {
-        DruidDataSource dataSource = getDruidDataSource();
-        List<Filter> proxyFilters = dataSource.getProxyFilters();
-        for (Filter proxyFilter : proxyFilters) {
-            if (proxyFilter instanceof SentinelDruidFilter filter) {
-                assertEquals(PLUGIN_NAME, filter.getName());
-                filter.setEnabled(enabled);
-            }
-        }
+    void testConstants() {
+        assertEquals("alibaba-druid", PLUGIN_NAME);
+        assertEquals("microsphere_sentinel_alibaba_druid_context", DEFAULT_CONTEXT_NAME);
+        assertEquals("Filter", DEFAULT_ORIGIN);
+        assertEquals("microsphere.sentinel.alibaba-druid.enabled", ENABLED_PROPERTY_NAME);
+        assertEquals(getPluginEnabledPropertyName(PLUGIN_NAME), ENABLED_PROPERTY_NAME);
     }
 }
