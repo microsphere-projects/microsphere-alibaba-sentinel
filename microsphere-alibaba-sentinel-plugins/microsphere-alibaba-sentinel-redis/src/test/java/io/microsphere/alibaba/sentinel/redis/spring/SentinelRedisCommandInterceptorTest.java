@@ -17,7 +17,7 @@
 
 package io.microsphere.alibaba.sentinel.redis.spring;
 
-import io.microsphere.alibaba.sentinel.redis.spring.test.RedisContextConfig;
+import io.microsphere.alibaba.sentinel.redis.spring.test.RedisConfig;
 import io.microsphere.redis.spring.annotation.EnableRedisInterceptor;
 import io.microsphere.redis.spring.context.RedisContext;
 import io.microsphere.redis.spring.interceptor.RedisMethodContext;
@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @since 1.0.0
  */
 @SpringJUnitConfig(classes = {
-        RedisContextConfig.class,
+        RedisConfig.class,
         SentinelRedisCommandInterceptorTest.class
 })
 @TestPropertySource(properties = {

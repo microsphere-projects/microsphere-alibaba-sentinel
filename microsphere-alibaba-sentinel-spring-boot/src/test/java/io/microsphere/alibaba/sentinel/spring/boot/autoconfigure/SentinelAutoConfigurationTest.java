@@ -53,7 +53,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 @SpringJUnitConfig(classes = {
         MyBatisDataBaseTestConfiguration.class,
-        RedisContextConfig.class,
+        RedisConfig.class,
         SentinelAutoConfigurationTest.class
 })
 @TestPropertySource(properties = {
