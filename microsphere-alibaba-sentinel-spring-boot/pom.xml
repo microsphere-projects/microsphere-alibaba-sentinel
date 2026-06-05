@@ -33,16 +33,44 @@
             <artifactId>microsphere-spring-boot-core</artifactId>
         </dependency>
 
-        <!-- Spring Boot Dependencies -->
+        <!-- Microsphere Sentinel x Alibaba Druid -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-            <optional>true</optional>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-alibaba-sentinel-alibaba-druid</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <!-- Microsphere Sentinel x Hibernate Core -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-alibaba-sentinel-hibernate-core</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <!-- Microsphere Sentinel x MyBatis -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-alibaba-sentinel-mybatis</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-actuator</artifactId>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-mybatis-spring</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Microsphere Sentinel x Redis -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-alibaba-sentinel-redis</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <!-- Microsphere Redis Spring -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-redis-spring</artifactId>
             <optional>true</optional>
         </dependency>
 
@@ -55,10 +83,17 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Spring Data Redis -->
+        <!-- Alibaba Druid -->
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-redis</artifactId>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Hibernate -->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
             <optional>true</optional>
         </dependency>
 
@@ -81,11 +116,31 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Spring Data Redis -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Spring Boot Dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-actuator</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!-- Testing -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
@@ -94,12 +149,35 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Microsphere Spring Test -->
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
             <artifactId>microsphere-spring-test</artifactId>
             <scope>test</scope>
         </dependency>
 
+        <!-- Microsphere Alibaba Druid Spring Test -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-alibaba-druid-spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Microsphere MyBatis Spring Test -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-mybatis-spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- H2 -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Lettuce -->
         <dependency>
             <groupId>io.lettuce</groupId>
             <artifactId>lettuce-core</artifactId>
