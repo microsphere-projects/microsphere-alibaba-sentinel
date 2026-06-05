@@ -41,6 +41,8 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Third-Party Dependencies -->
+
         <!-- Alibaba Sentinel -->
         <dependency>
             <groupId>com.alibaba.csp</groupId>

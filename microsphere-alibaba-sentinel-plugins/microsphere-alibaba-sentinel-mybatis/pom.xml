@@ -27,6 +27,12 @@
             <version>${revision}</version>
         </dependency>
 
+        <!-- Microsphere MyBatis Core -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-mybatis-core</artifactId>
+        </dependency>
+
         <!-- Microsphere Annotation Processor -->
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
@@ -34,17 +40,13 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Third-Party Dependencies -->
+
         <!-- Alibaba Sentinel -->
         <dependency>
             <groupId>com.alibaba.csp</groupId>
             <artifactId>sentinel-core</artifactId>
             <optional>true</optional>
-        </dependency>
-
-        <!-- Microsphere MyBatis Core -->
-        <dependency>
-            <groupId>io.github.microsphere-projects</groupId>
-            <artifactId>microsphere-mybatis-core</artifactId>
         </dependency>
 
         <!-- MyBatis -->

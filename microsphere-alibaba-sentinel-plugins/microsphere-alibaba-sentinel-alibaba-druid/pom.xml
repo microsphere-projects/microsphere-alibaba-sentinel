@@ -31,7 +31,6 @@
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
             <artifactId>microsphere-alibaba-druid-core</artifactId>
-            <optional>true</optional>
         </dependency>
 
         <!-- Microsphere Annotation Processor -->
@@ -41,17 +40,19 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Alibaba Druid -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <optional>true</optional>
-        </dependency>
+        <!-- Third-Party Dependencies -->
 
         <!-- Alibaba Sentinel -->
         <dependency>
             <groupId>com.alibaba.csp</groupId>
             <artifactId>sentinel-core</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Alibaba Druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
             <optional>true</optional>
         </dependency>
 
