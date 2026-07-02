@@ -4,7 +4,7 @@
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/microsphere-projects/microsphere-sentinel)
 [![Maven Build](https://github.com/microsphere-projects/microsphere-sentinel/actions/workflows/maven-build.yml/badge.svg)](https://github.com/microsphere-projects/microsphere-sentinel/actions/workflows/maven-build.yml)
-[![Codecov](https://codecov.io/gh/microsphere-projects/microsphere-sentinel/branch/main/graph/badge.svg)](https://app.codecov.io/gh/microsphere-projects/microsphere-sentinel)
+[![Codecov](https://codecov.io/gh/microsphere-projects/microsphere-alibaba-sentinel/branch/main/graph/badge.svg)](https://app.codecov.io/gh/microsphere-projects/microsphere-alibaba-sentinel)
 ![Maven](https://img.shields.io/maven-central/v/io.github.microsphere-projects/microsphere-sentinel.svg)
 ![License](https://img.shields.io/github/license/microsphere-projects/microsphere-sentinel.svg)
 
