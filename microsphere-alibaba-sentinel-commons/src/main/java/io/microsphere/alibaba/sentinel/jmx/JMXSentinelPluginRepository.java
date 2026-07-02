@@ -17,11 +17,11 @@
 
 package io.microsphere.alibaba.sentinel.jmx;
 
-import io.microsphere.lang.Prioritized;
-import io.microsphere.lang.function.ThrowableBiFunction;
 import io.microsphere.alibaba.sentinel.common.SentinelPlugin;
 import io.microsphere.alibaba.sentinel.common.SentinelPluginRepository;
 import io.microsphere.alibaba.sentinel.common.SimpleSentinelPluginRepository;
+import io.microsphere.lang.Prioritized;
+import io.microsphere.lang.function.ThrowableBiFunction;
 
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
@@ -29,8 +29,8 @@ import javax.management.StandardMBean;
 import java.util.Collection;
 import java.util.Set;
 
-import static io.microsphere.lang.function.ThrowableSupplier.execute;
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.DEFAULT_PRIORITY;
+import static io.microsphere.lang.function.ThrowableSupplier.execute;
 import static io.microsphere.text.FormatUtils.format;
 import static java.lang.management.ManagementFactory.getPlatformMBeanServer;
 import static java.util.Collections.emptyList;

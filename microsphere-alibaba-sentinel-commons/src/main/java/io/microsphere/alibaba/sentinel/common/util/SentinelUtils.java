@@ -13,14 +13,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadFactory;
 
+import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.DEFAULT_CONTEXT_NAME_PATTERN;
+import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.FLOW_DATA_ID_PATTERN;
+import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.PROPERTY_NAME_PREFIX;
 import static io.microsphere.collection.MapUtils.newFixedHashMap;
 import static io.microsphere.constants.PropertyConstants.ENABLED_PROPERTY_NAME;
 import static io.microsphere.constants.SymbolConstants.DOT;
 import static io.microsphere.reflect.FieldUtils.getFieldValue;
 import static io.microsphere.reflect.FieldUtils.getStaticFieldValue;
-import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.DEFAULT_CONTEXT_NAME_PATTERN;
-import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.FLOW_DATA_ID_PATTERN;
-import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.PROPERTY_NAME_PREFIX;
 import static io.microsphere.text.FormatUtils.format;
 import static io.microsphere.util.ClassUtils.getSimpleName;
 import static io.microsphere.util.SystemUtils.getSystemProperty;

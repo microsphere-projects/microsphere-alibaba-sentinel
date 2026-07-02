@@ -19,11 +19,11 @@ package io.microsphere.alibaba.sentinel.p6spy;
 
 import org.junit.jupiter.api.Test;
 
+import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getPluginEnabledPropertyName;
 import static io.microsphere.alibaba.sentinel.p6spy.SentinelP6SpyConstants.DEFAULT_CONTEXT_NAME;
 import static io.microsphere.alibaba.sentinel.p6spy.SentinelP6SpyConstants.DEFAULT_ORIGIN;
 import static io.microsphere.alibaba.sentinel.p6spy.SentinelP6SpyConstants.ENABLED_PROPERTY_NAME;
 import static io.microsphere.alibaba.sentinel.p6spy.SentinelP6SpyConstants.PLUGIN_NAME;
-import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getPluginEnabledPropertyName;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**

@@ -16,13 +16,13 @@
  */
 package io.microsphere.alibaba.sentinel.spring.web;
 
-import io.microsphere.annotation.Nonnull;
-import io.microsphere.logging.Logger;
 import io.microsphere.alibaba.sentinel.common.AbstractSentinelPlugin;
 import io.microsphere.alibaba.sentinel.common.SentinelContext;
 import io.microsphere.alibaba.sentinel.common.SentinelOperations;
 import io.microsphere.alibaba.sentinel.common.SentinelPlugin;
 import io.microsphere.alibaba.sentinel.common.SentinelTemplate;
+import io.microsphere.annotation.Nonnull;
+import io.microsphere.logging.Logger;
 import io.microsphere.spring.web.annotation.EnableWebExtension;
 import io.microsphere.spring.web.event.WebEndpointMappingsReadyEvent;
 import io.microsphere.spring.web.metadata.WebEndpointMapping;
@@ -38,13 +38,13 @@ import java.util.Iterator;
 import java.util.Map;
 
 import static com.alibaba.csp.sentinel.ResourceTypeConstants.COMMON_WEB;
-import static io.microsphere.collection.MapUtils.newFixedHashMap;
-import static io.microsphere.logging.LoggerFactory.getLogger;
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.DEFAULT_PRIORITY;
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.SENTINEL_CONTEXT_ATTRIBUTE_NAME;
 import static io.microsphere.alibaba.sentinel.spring.web.SentinelSpringWebConstants.DEFAULT_CONTEXT_NAME;
 import static io.microsphere.alibaba.sentinel.spring.web.SentinelSpringWebConstants.DEFAULT_ORIGIN;
 import static io.microsphere.alibaba.sentinel.spring.web.SentinelSpringWebConstants.PLUGIN_NAME;
+import static io.microsphere.collection.MapUtils.newFixedHashMap;
+import static io.microsphere.logging.LoggerFactory.getLogger;
 import static io.microsphere.spring.web.util.WebScope.REQUEST;
 
 /**

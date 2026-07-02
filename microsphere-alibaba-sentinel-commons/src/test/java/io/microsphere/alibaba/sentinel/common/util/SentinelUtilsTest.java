@@ -9,7 +9,6 @@ import static com.alibaba.csp.sentinel.ResourceTypeConstants.COMMON_API_GATEWAY;
 import static com.alibaba.csp.sentinel.ResourceTypeConstants.COMMON_DB_SQL;
 import static com.alibaba.csp.sentinel.ResourceTypeConstants.COMMON_RPC;
 import static com.alibaba.csp.sentinel.ResourceTypeConstants.COMMON_WEB;
-import static io.microsphere.reflect.MethodUtils.findMethod;
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.DEFAULT_CONTEXT_NAME;
 import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.buildResourceName;
 import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.findSentinelMetricsTaskExecutor;
@@ -19,6 +18,7 @@ import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getPlugi
 import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getResourceTypeAsString;
 import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getSentinelMetricsTaskExecutor;
 import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.isPluginEnabled;
+import static io.microsphere.reflect.MethodUtils.findMethod;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

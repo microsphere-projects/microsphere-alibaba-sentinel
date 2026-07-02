@@ -16,13 +16,13 @@
  */
 package io.microsphere.alibaba.sentinel.redis.spring;
 
-import io.microsphere.logging.Logger;
-import io.microsphere.redis.spring.interceptor.RedisConnectionInterceptor;
-import io.microsphere.redis.spring.interceptor.RedisMethodContext;
 import io.microsphere.alibaba.sentinel.common.AbstractSentinelPlugin;
 import io.microsphere.alibaba.sentinel.common.SentinelContext;
 import io.microsphere.alibaba.sentinel.common.SentinelOperations;
 import io.microsphere.alibaba.sentinel.common.SentinelTemplate;
+import io.microsphere.logging.Logger;
+import io.microsphere.redis.spring.interceptor.RedisConnectionInterceptor;
+import io.microsphere.redis.spring.interceptor.RedisMethodContext;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.data.redis.connection.RedisClusterConnection;
@@ -31,14 +31,14 @@ import org.springframework.data.redis.connection.RedisConnection;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import static io.microsphere.collection.MapUtils.newFixedHashMap;
-import static io.microsphere.logging.LoggerFactory.getLogger;
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.DEFAULT_PRIORITY;
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.SENTINEL_CONTEXT_ATTRIBUTE_NAME;
 import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.buildResourceName;
 import static io.microsphere.alibaba.sentinel.redis.SentinelRedisConstants.DEFAULT_CONTEXT_NAME;
 import static io.microsphere.alibaba.sentinel.redis.SentinelRedisConstants.DEFAULT_ORIGIN;
 import static io.microsphere.alibaba.sentinel.redis.SentinelRedisConstants.PLUGIN_NAME;
+import static io.microsphere.collection.MapUtils.newFixedHashMap;
+import static io.microsphere.logging.LoggerFactory.getLogger;
 import static org.springframework.util.ClassUtils.getAllInterfacesForClass;
 
 /**

@@ -21,24 +21,24 @@ import com.p6spy.engine.common.PreparedStatementInformation;
 import com.p6spy.engine.common.StatementInformation;
 import com.p6spy.engine.event.JdbcEventListener;
 import com.p6spy.engine.event.SimpleJdbcEventListener;
-import io.microsphere.logging.Logger;
 import io.microsphere.alibaba.sentinel.common.SentinelContext;
 import io.microsphere.alibaba.sentinel.common.SentinelOperations;
 import io.microsphere.alibaba.sentinel.common.SentinelPlugin;
 import io.microsphere.alibaba.sentinel.common.SentinelTemplate;
 import io.microsphere.alibaba.sentinel.common.SimpleSentinelPlugin;
+import io.microsphere.logging.Logger;
 
 import java.sql.SQLException;
 
 import static com.alibaba.csp.sentinel.EntryType.IN;
 import static com.alibaba.csp.sentinel.ResourceTypeConstants.COMMON_DB_SQL;
-import static io.microsphere.lang.function.ThrowableAction.execute;
-import static io.microsphere.logging.LoggerFactory.getLogger;
 import static io.microsphere.alibaba.sentinel.common.SentinelContext.doInContext;
 import static io.microsphere.alibaba.sentinel.common.SentinelPlugin.install;
 import static io.microsphere.alibaba.sentinel.p6spy.SentinelP6SpyConstants.DEFAULT_CONTEXT_NAME;
 import static io.microsphere.alibaba.sentinel.p6spy.SentinelP6SpyConstants.DEFAULT_ORIGIN;
 import static io.microsphere.alibaba.sentinel.p6spy.SentinelP6SpyConstants.PLUGIN_NAME;
+import static io.microsphere.lang.function.ThrowableAction.execute;
+import static io.microsphere.logging.LoggerFactory.getLogger;
 
 /**
  * P6Spy {@link JdbcEventListener} based on Alibaba Sentinel

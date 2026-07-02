@@ -17,11 +17,11 @@
 
 package io.microsphere.alibaba.sentinel.mybatis.executor;
 
-import io.microsphere.mybatis.executor.ExecutorFilter;
-import io.microsphere.mybatis.executor.ExecutorFilterChain;
 import io.microsphere.alibaba.sentinel.common.AbstractSentinelPlugin;
 import io.microsphere.alibaba.sentinel.common.SentinelOperations;
 import io.microsphere.alibaba.sentinel.common.SentinelTemplate;
+import io.microsphere.mybatis.executor.ExecutorFilter;
+import io.microsphere.mybatis.executor.ExecutorFilterChain;
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;

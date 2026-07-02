@@ -19,11 +19,11 @@ package io.microsphere.alibaba.sentinel.hibernate;
 
 import org.junit.jupiter.api.Test;
 
+import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getPluginEnabledPropertyName;
 import static io.microsphere.alibaba.sentinel.hibernate.SentinelHibernateConstants.DEFAULT_CONTEXT_NAME;
 import static io.microsphere.alibaba.sentinel.hibernate.SentinelHibernateConstants.DEFAULT_ORIGIN;
 import static io.microsphere.alibaba.sentinel.hibernate.SentinelHibernateConstants.ENABLED_PROPERTY_NAME;
 import static io.microsphere.alibaba.sentinel.hibernate.SentinelHibernateConstants.PLUGIN_NAME;
-import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getPluginEnabledPropertyName;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**

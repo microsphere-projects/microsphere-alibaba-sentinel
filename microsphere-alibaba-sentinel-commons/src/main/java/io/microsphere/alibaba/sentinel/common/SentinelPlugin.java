@@ -19,9 +19,9 @@ package io.microsphere.alibaba.sentinel.common;
 
 import com.alibaba.csp.sentinel.EntryType;
 import com.alibaba.csp.sentinel.ResourceTypeConstants;
-import io.microsphere.annotation.Nonnull;
 import io.microsphere.alibaba.sentinel.common.constants.SentinelConstants;
 import io.microsphere.alibaba.sentinel.common.util.SentinelUtils;
+import io.microsphere.annotation.Nonnull;
 
 import static io.microsphere.alibaba.sentinel.common.SentinelPluginRepository.INSTANCE;
 import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getDefaultContextName;
