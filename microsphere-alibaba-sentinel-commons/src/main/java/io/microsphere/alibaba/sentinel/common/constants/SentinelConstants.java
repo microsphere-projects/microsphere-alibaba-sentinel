@@ -18,6 +18,11 @@
 package io.microsphere.alibaba.sentinel.common.constants;
 
 import io.microsphere.alibaba.sentinel.common.SentinelContext;
+import io.microsphere.annotation.ConfigurationProperty;
+import io.microsphere.constants.PropertyConstants;
+
+import static io.microsphere.annotation.ConfigurationProperty.APPLICATION_SOURCE;
+import static io.microsphere.annotation.ConfigurationProperty.SYSTEM_PROPERTIES_SOURCE;
 
 /**
  * The constants of Sentinel
@@ -51,6 +56,24 @@ public interface SentinelConstants {
      * The Property Name Prefix of Sentinel : "microsphere.sentinel."
      */
     String PROPERTY_NAME_PREFIX = "microsphere.sentinel.";
+
+    /**
+     * The default value of enabled : "true"
+     */
+    String ENABLED_PROPERTY_VALUE = "true";
+
+    /**
+     * The Property Name of enabled : "microsphere.sentinel.enabled"
+     */
+    @ConfigurationProperty(
+            type = boolean.class,
+            defaultValue = ENABLED_PROPERTY_VALUE,
+            source = {
+                    SYSTEM_PROPERTIES_SOURCE,
+                    APPLICATION_SOURCE
+            }
+    )
+    String ENABLED_PROPERTY_NAME = PROPERTY_NAME_PREFIX + PropertyConstants.ENABLED_PROPERTY_NAME;
 
     /**
      * The attribute name of {@link SentinelContext}

@@ -20,6 +20,7 @@ package io.microsphere.alibaba.sentinel.redis;
 import io.microsphere.annotation.ConfigurationProperty;
 import io.microsphere.constants.PropertyConstants;
 
+import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.ENABLED_PROPERTY_VALUE;
 import static io.microsphere.annotation.ConfigurationProperty.APPLICATION_SOURCE;
 import static io.microsphere.annotation.ConfigurationProperty.SYSTEM_PROPERTIES_SOURCE;
 import static io.microsphere.constants.SymbolConstants.DOT;
@@ -53,7 +54,7 @@ public interface SentinelRedisConstants {
      */
     @ConfigurationProperty(
             type = boolean.class,
-            defaultValue = "true",
+            defaultValue = ENABLED_PROPERTY_VALUE,
             source = {
                     SYSTEM_PROPERTIES_SOURCE,
                     APPLICATION_SOURCE

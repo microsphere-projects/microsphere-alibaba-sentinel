@@ -1,15 +1,14 @@
 package io.microsphere.alibaba.sentinel.spring.boot.autoconfigure;
 
-import io.microsphere.alibaba.sentinel.spring.boot.condition.ConditionalOnSentinelEnabled;
+import io.microsphere.alibaba.sentinel.mybatis.SentinelMyBatisConstants;
+import io.microsphere.alibaba.sentinel.redis.SentinelRedisConstants;
+import io.microsphere.alibaba.sentinel.spring.boot.condition.ConditionalOnSentinelAvailiable;
 import io.microsphere.mybatis.spring.annotation.EnableMyBatis;
 import io.microsphere.redis.spring.annotation.EnableRedisInterceptor;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Import;
-
-import static io.microsphere.alibaba.sentinel.spring.boot.condition.ConditionalOnSentinelEnabled.PREFIX;
-import static io.microsphere.constants.PropertyConstants.ENABLED_PROPERTY_NAME;
 
 /**
  * Microsphere Sentinel Spring Boot Auto-Configuration
@@ -18,7 +17,7 @@ import static io.microsphere.constants.PropertyConstants.ENABLED_PROPERTY_NAME;
  * @see com.alibaba.cloud.sentinel.custom.SentinelAutoConfiguration
  * @since 1.0.0
  */
-@ConditionalOnSentinelEnabled
+@ConditionalOnSentinelAvailiable
 @AutoConfigureAfter(name = {
         "org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration",
         "org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration",
@@ -31,8 +30,7 @@ import static io.microsphere.constants.PropertyConstants.ENABLED_PROPERTY_NAME;
 public class SentinelAutoConfiguration {
 
     @ConditionalOnProperty(
-            prefix = PREFIX + "redis",
-            name = ENABLED_PROPERTY_NAME,
+            name = SentinelRedisConstants.ENABLED_PROPERTY_NAME,
             matchIfMissing = true
     )
     @ConditionalOnClass(name = {
@@ -44,8 +42,7 @@ public class SentinelAutoConfiguration {
     }
 
     @ConditionalOnProperty(
-            prefix = PREFIX + "mybatis",
-            name = ENABLED_PROPERTY_NAME,
+            name = SentinelMyBatisConstants.ENABLED_PROPERTY_NAME,
             matchIfMissing = true
     )
     @ConditionalOnClass(name = {

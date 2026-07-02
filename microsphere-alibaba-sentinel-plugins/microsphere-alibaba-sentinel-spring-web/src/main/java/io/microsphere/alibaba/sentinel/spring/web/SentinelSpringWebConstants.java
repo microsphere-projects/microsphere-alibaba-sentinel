@@ -20,6 +20,7 @@ package io.microsphere.alibaba.sentinel.spring.web;
 import io.microsphere.annotation.ConfigurationProperty;
 import io.microsphere.constants.PropertyConstants;
 
+import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.ENABLED_PROPERTY_VALUE;
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.PROPERTY_NAME_PREFIX;
 import static io.microsphere.annotation.ConfigurationProperty.APPLICATION_SOURCE;
 import static io.microsphere.annotation.ConfigurationProperty.SYSTEM_PROPERTIES_SOURCE;
@@ -53,7 +54,7 @@ public interface SentinelSpringWebConstants {
      */
     @ConfigurationProperty(
             type = boolean.class,
-            defaultValue = "true",
+            defaultValue = ENABLED_PROPERTY_VALUE,
             source = {
                     SYSTEM_PROPERTIES_SOURCE,
                     APPLICATION_SOURCE

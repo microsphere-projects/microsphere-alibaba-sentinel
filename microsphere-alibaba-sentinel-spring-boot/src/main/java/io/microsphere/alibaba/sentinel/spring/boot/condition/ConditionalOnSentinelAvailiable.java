@@ -17,19 +17,33 @@
 package io.microsphere.alibaba.sentinel.spring.boot.condition;
 
 import io.microsphere.alibaba.sentinel.spring.boot.autoconfigure.SentinelAutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.ENABLED_PROPERTY_NAME;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * {@link ConditionalOnProperty} based annotation for Alibaba Sentinel enabled property.
+ * Indicates that a component is eligible for registration when Alibaba Sentinel is available.
+ * <p>
+ * This annotation combines {@link ConditionalOnSentinelEnabled @ConditionalOnSentinelEnabled} and
+ * {@link ConditionalOnClass @ConditionalOnClass(name = "com.alibaba.csp.sentinel.SphU")},
+ * meaning the annotated component will be registered only if Sentinel is explicitly enabled
+ * and the Sentinel core classes are present on the classpath.
+ * </p>
+ *
+ * <h3>Usage Example</h3>
+ * <pre>{@code
+ * @Configuration
+ * @ConditionalOnSentinelAvailiable
+ * public class MySentinelConfiguration {
+ *     // This configuration will only be active if Sentinel is available
+ * }
+ * }</pre>
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see SentinelAutoConfiguration
@@ -38,6 +52,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Target({TYPE, METHOD})
 @Documented
-@ConditionalOnProperty(name = ENABLED_PROPERTY_NAME, matchIfMissing = true)
-public @interface ConditionalOnSentinelEnabled {
+@ConditionalOnSentinelEnabled
+@ConditionalOnClass(name = {
+        "com.alibaba.csp.sentinel.SphU"
+})
+public @interface ConditionalOnSentinelAvailiable {
 }
