@@ -45,9 +45,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
- * {@link SentinelRedisAutoConfiguration} Test
+ * SentinelAutoConfiguration Test
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
+ * @see SentinelAlibabaDruidAutoConfiguration
+ * @see SentinelMyBatisAutoConfiguration
  * @see SentinelRedisAutoConfiguration
  * @since 1.0.0
  */
