@@ -54,7 +54,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringJUnitConfig(classes = {
         MyBatisDataBaseTestConfiguration.class,
         RedisConfig.class,
-        SentinelRedisAutoConfigurationTest.class
+        SentinelAutoConfigurationTest.class
 })
 @TestPropertySource(properties = {
         "microsphere.redis.enabled=true",
@@ -62,7 +62,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
         "mybatis.configLocation=META-INF/mybatis/config.xml"
 })
 @EnableAutoConfiguration
-class SentinelRedisAutoConfigurationTest {
+class SentinelAutoConfigurationTest {
 
     @Autowired
     private RedisContext redisContext;
