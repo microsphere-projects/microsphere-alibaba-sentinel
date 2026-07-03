@@ -37,6 +37,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class SentinelAlibabaDruidFilterTest extends AbstractAlibabaDruidTest {
 
+    @Override
+    protected void customize(DruidDataSource dataSource) {
+        dataSource.getProxyFilters().add(new SentinelAlibabaDruidFilter());
+    }
+
     @Test
     void testEnable() throws Throwable {
         setEnable(true);

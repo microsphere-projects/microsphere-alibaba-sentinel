@@ -16,7 +16,7 @@
  */
 package io.microsphere.alibaba.sentinel.spring.boot.condition;
 
-import io.microsphere.alibaba.sentinel.spring.boot.autoconfigure.SentinelAutoConfiguration;
+import io.microsphere.alibaba.sentinel.spring.boot.autoconfigure.SentinelRedisAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 
 import java.lang.annotation.Documented;
@@ -31,9 +31,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * Indicates that a component is eligible for registration when Alibaba Sentinel is available.
  * <p>
  * This annotation combines {@link ConditionalOnSentinelEnabled @ConditionalOnSentinelEnabled} and
- * {@link ConditionalOnClass @ConditionalOnClass(name = "com.alibaba.csp.sentinel.SphU")},
- * meaning the annotated component will be registered only if Sentinel is explicitly enabled
- * and the Sentinel core classes are present on the classpath.
+ * {@link ConditionalOnClass @ConditionalOnClass(name = {"com.alibaba.csp.sentinel.SphU" ,
+ * "io.microsphere.alibaba.sentinel.common.SentinelPlugin"})}, meaning the annotated component will be registered
+ * only if Sentinel is explicitly enabled and the Sentinel core classes are present on the classpath.
  * </p>
  *
  * <h3>Usage Example</h3>
@@ -46,7 +46,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * }</pre>
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
- * @see SentinelAutoConfiguration
+ * @see SentinelRedisAutoConfiguration
  * @since 1.0.0
  */
 @Retention(RUNTIME)
@@ -54,7 +54,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 @ConditionalOnSentinelEnabled
 @ConditionalOnClass(name = {
-        "com.alibaba.csp.sentinel.SphU"
+        "com.alibaba.csp.sentinel.SphU",
+        "io.microsphere.alibaba.sentinel.common.SentinelPlugin"
 })
-public @interface ConditionalOnSentinelAvailiable {
+public @interface ConditionalOnSentinelAvailable {
 }

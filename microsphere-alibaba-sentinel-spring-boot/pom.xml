@@ -40,11 +40,25 @@
             <version>${revision}</version>
         </dependency>
 
+        <!-- Microsphere Alibaba Druid -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-alibaba-druid-spring-boot</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!-- Microsphere Sentinel x Hibernate Core -->
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
             <artifactId>microsphere-alibaba-sentinel-hibernate-core</artifactId>
             <version>${revision}</version>
+        </dependency>
+
+        <!-- Microsphere Hibernate Core -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-hibernate-core</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <!-- Microsphere Sentinel x MyBatis -->
@@ -54,9 +68,10 @@
             <version>${revision}</version>
         </dependency>
 
+        <!-- Microsphere MyBatis Spring Boot -->
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
-            <artifactId>microsphere-mybatis-spring</artifactId>
+            <artifactId>microsphere-mybatis-spring-boot</artifactId>
             <optional>true</optional>
         </dependency>
 
@@ -67,10 +82,31 @@
             <version>${revision}</version>
         </dependency>
 
-        <!-- Microsphere Redis Spring -->
+        <!-- Microsphere Redis Spring Boot -->
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
-            <artifactId>microsphere-redis-spring</artifactId>
+            <artifactId>microsphere-redis-spring-boot</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Microsphere Sentinel x Spring Web -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-alibaba-sentinel-spring-web</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <!-- Microsphere Spring Boot Web MVC -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-spring-boot-webmvc</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Microsphere Spring Boot WebFlux -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-spring-boot-webflux</artifactId>
             <optional>true</optional>
         </dependency>
 
@@ -163,10 +199,24 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Microsphere Hibernate Test -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-hibernate-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <!-- Microsphere MyBatis Spring Test -->
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
             <artifactId>microsphere-mybatis-spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Microsphere Redis Spring Test -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-redis-spring-test</artifactId>
             <scope>test</scope>
         </dependency>
 

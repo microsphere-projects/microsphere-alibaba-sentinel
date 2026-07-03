@@ -16,7 +16,7 @@
  */
 package io.microsphere.alibaba.sentinel.spring.boot.condition;
 
-import io.microsphere.alibaba.sentinel.spring.boot.autoconfigure.SentinelAutoConfiguration;
+import io.microsphere.alibaba.sentinel.spring.boot.autoconfigure.SentinelRedisAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 import java.lang.annotation.Documented;
@@ -32,7 +32,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * {@link ConditionalOnProperty} based annotation for Alibaba Sentinel enabled property.
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
- * @see SentinelAutoConfiguration
+ * @see SentinelRedisAutoConfiguration
  * @since 1.0.0
  */
 @Retention(RUNTIME)

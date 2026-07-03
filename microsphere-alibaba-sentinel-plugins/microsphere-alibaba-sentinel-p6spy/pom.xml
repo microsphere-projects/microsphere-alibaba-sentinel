@@ -20,18 +20,18 @@
 
     <dependencies>
 
-        <!-- Microsphere Sentinel Commons -->
-        <dependency>
-            <groupId>io.github.microsphere-projects</groupId>
-            <artifactId>microsphere-alibaba-sentinel-commons</artifactId>
-            <version>${revision}</version>
-        </dependency>
-
         <!-- Microsphere Annotation Processor -->
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
             <artifactId>microsphere-annotation-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <!-- Microsphere Sentinel Commons -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-alibaba-sentinel-commons</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <!-- Third-Party Dependencies -->

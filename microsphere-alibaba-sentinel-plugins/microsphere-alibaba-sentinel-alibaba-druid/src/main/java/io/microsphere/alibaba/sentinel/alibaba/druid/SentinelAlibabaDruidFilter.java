@@ -17,7 +17,6 @@
 package io.microsphere.alibaba.sentinel.alibaba.druid;
 
 import com.alibaba.csp.sentinel.EntryType;
-import com.alibaba.druid.filter.AutoLoad;
 import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.filter.FilterAdapter;
 import com.alibaba.druid.proxy.jdbc.StatementProxy;
@@ -44,7 +43,6 @@ import static io.microsphere.alibaba.sentinel.common.SentinelPlugin.install;
  * @see FilterAdapter
  * @since 1.0.0
  */
-@AutoLoad
 public class SentinelAlibabaDruidFilter extends AbstractStatementFilter implements SentinelPlugin {
 
     private final SentinelPlugin delegate;
