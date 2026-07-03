@@ -24,7 +24,7 @@
         <microsphere-alibaba-druid.version>0.2.17</microsphere-alibaba-druid.version>
         <microsphere-mybatis.version>0.2.12</microsphere-mybatis.version>
         <microsphere-hibernate.version>0.2.6</microsphere-hibernate.version>
-        <microsphere-redis.version>0.2.9</microsphere-redis.version>
+        <microsphere-redis.version>0.2.10</microsphere-redis.version>
         <!-- Third-party versions -->
         <sentinel.version>1.8.10</sentinel.version>
         <fastjson.version>2.0.62</fastjson.version>
