@@ -2,7 +2,6 @@ package io.microsphere.alibaba.sentinel.spring.boot.autoconfigure;
 
 import io.microsphere.alibaba.sentinel.redis.spring.SentinelRedisCommandInterceptor;
 import io.microsphere.alibaba.sentinel.spring.boot.condition.ConditionalOnSentinelAvailable;
-import io.microsphere.redis.spring.annotation.EnableRedisInterceptor;
 import io.microsphere.redis.spring.boot.autoconfigure.condition.ConditionalOnRedisAvailable;
 import io.microsphere.redis.spring.boot.autoconfigure.condition.ConditionalOnRedisInterceptorEnabled;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -26,7 +25,6 @@ import static io.microsphere.alibaba.sentinel.redis.SentinelRedisConstants.ENABL
 @ConditionalOnRedisAvailable
 @ConditionalOnProperty(name = ENABLED_PROPERTY_NAME, matchIfMissing = true)
 @ConditionalOnClass(name = {
-        "io.microsphere.redis.spring.annotation.EnableRedisInterceptor",                  // Microsphere Redis Spring
         "io.microsphere.alibaba.sentinel.redis.spring.SentinelRedisCommandInterceptor"    // Microsphere Alibaba Sentinel x Redis
 })
 @AutoConfigureAfter(name = {
@@ -39,7 +37,6 @@ import static io.microsphere.alibaba.sentinel.redis.SentinelRedisConstants.ENABL
 public class SentinelRedisAutoConfiguration {
 
     @ConditionalOnRedisInterceptorEnabled
-    @EnableRedisInterceptor
     static class Config {
 
         @Bean
