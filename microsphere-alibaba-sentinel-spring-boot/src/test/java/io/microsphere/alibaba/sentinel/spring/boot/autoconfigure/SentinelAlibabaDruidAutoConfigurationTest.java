@@ -20,13 +20,9 @@ package io.microsphere.alibaba.sentinel.spring.boot.autoconfigure;
 
 import io.microsphere.alibaba.sentinel.alibaba.druid.SentinelAlibabaDruidFilter;
 import io.microsphere.alibaba.sentinel.spring.boot.autoconfigure.SentinelAlibabaDruidAutoConfiguration.Config;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.FilteredClassLoader;
-import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.boot.autoconfigure.AutoConfigurations.of;
 
 /**
  * {@link SentinelAlibabaDruidAutoConfiguration} Test
@@ -35,20 +31,13 @@ import static org.springframework.boot.autoconfigure.AutoConfigurations.of;
  * @see SentinelAlibabaDruidAutoConfiguration
  * @since 1.0.0
  */
-class SentinelAlibabaDruidAutoConfigurationTest {
-
-    ApplicationContextRunner applicationContextRunner;
-
-    @BeforeEach
-    void setUp() {
-        this.applicationContextRunner = new ApplicationContextRunner()
-                .withConfiguration(of(SentinelAlibabaDruidAutoConfiguration.class));
-    }
+class SentinelAlibabaDruidAutoConfigurationTest extends AutoConfigurationTest<SentinelAlibabaDruidAutoConfiguration> {
 
     @Test
     void testDefaults() {
         this.applicationContextRunner.run(context -> {
             assertThat(context).hasSingleBean(SentinelAlibabaDruidAutoConfiguration.class)
+                    .hasSingleBean(Config.class)
                     .hasSingleBean(SentinelAlibabaDruidFilter.class);
         });
     }
@@ -77,21 +66,4 @@ class SentinelAlibabaDruidAutoConfigurationTest {
                 Config.class, SentinelAlibabaDruidFilter.class);
     }
 
-    void assertDisabledProperty(String propertyValue, Class<?>... beanClasses) {
-        this.applicationContextRunner.withPropertyValues(propertyValue)
-                .run(context -> {
-                    for (Class<?> beanClass : beanClasses) {
-                        assertThat(context).doesNotHaveBean(beanClass);
-                    }
-                });
-    }
-
-    void assertFilteredClass(String filteredClass, Class<?>... beanClasses) {
-        this.applicationContextRunner.withClassLoader(new FilteredClassLoader(filteredClass))
-                .run(context -> {
-                    for (Class<?> beanClass : beanClasses) {
-                        assertThat(context).doesNotHaveBean(beanClass);
-                    }
-                });
-    }
 }

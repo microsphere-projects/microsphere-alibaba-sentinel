@@ -49,7 +49,7 @@ public interface SentinelMyBatisConstants {
     String DEFAULT_ORIGIN = "Executor";
 
     /**
-     * The property name of the plugin of Sentinel x MyBatis enabled
+     * The property name of the plugin of Sentinel x MyBatis enabled : "microsphere.sentinel.mybatis.enabled"
      */
     @ConfigurationProperty(
             type = boolean.class,
