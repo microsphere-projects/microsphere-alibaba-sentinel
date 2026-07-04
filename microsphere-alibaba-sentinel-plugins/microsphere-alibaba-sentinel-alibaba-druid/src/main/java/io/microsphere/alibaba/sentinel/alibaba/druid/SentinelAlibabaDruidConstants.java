@@ -49,7 +49,7 @@ public interface SentinelAlibabaDruidConstants {
     String DEFAULT_ORIGIN = "Filter";
 
     /**
-     * The property name of the plugin of Sentinel x Alibaba Druid enabled
+     * The property name of the plugin of Sentinel x Alibaba Druid enabled : "microsphere.sentinel.alibaba-druid.enabled"
      */
     @ConfigurationProperty(
             type = boolean.class,

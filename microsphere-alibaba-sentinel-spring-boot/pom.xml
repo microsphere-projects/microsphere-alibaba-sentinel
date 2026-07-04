@@ -179,6 +179,13 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- AssertJ -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <!-- Spring Test -->
         <dependency>
             <groupId>org.springframework</groupId>
