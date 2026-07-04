@@ -23,6 +23,7 @@ import static io.microsphere.alibaba.sentinel.redis.SentinelRedisConstants.ENABL
  * @since 1.0.0
  */
 @ConditionalOnSentinelAvailable
+@ConditionalOnRedisAvailable
 @ConditionalOnProperty(name = ENABLED_PROPERTY_NAME, matchIfMissing = true)
 @ConditionalOnClass(name = {
         "io.microsphere.redis.spring.annotation.EnableRedisInterceptor",                  // Microsphere Redis Spring
@@ -37,7 +38,6 @@ import static io.microsphere.alibaba.sentinel.redis.SentinelRedisConstants.ENABL
 })
 public class SentinelRedisAutoConfiguration {
 
-    @ConditionalOnRedisAvailable
     @ConditionalOnRedisInterceptorEnabled
     @EnableRedisInterceptor
     static class Config {
