@@ -45,5 +45,4 @@ public class SentinelRedisAutoConfiguration {
             return new SentinelRedisCommandInterceptor();
         }
     }
-
 }
