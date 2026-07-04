@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Import;
 import static io.microsphere.alibaba.sentinel.redis.SentinelRedisConstants.ENABLED_PROPERTY_NAME;
 
 /**
- * Microsphere Sentinel Spring Boot Auto-Configuration
+ * The Spring Boot Auto-Configuration class of Alibaba Sentinel x Redis
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see com.alibaba.cloud.sentinel.custom.SentinelAutoConfiguration

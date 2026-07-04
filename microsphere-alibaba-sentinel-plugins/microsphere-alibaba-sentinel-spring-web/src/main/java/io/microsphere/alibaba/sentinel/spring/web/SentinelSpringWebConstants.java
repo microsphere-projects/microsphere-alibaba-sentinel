@@ -50,7 +50,7 @@ public interface SentinelSpringWebConstants {
     String DEFAULT_ORIGIN = "HandlerMethod";
 
     /**
-     * The property name of the plugin of Sentinel x Spring Web enabled
+     * The property name of the plugin of Sentinel x Spring Web enabled : "microsphere.sentinel.spring-web.enabled"
      */
     @ConfigurationProperty(
             type = boolean.class,

@@ -20,9 +20,10 @@ package io.microsphere.alibaba.sentinel.spring.boot.autoconfigure;
 
 import io.microsphere.alibaba.sentinel.mybatis.executor.SentinelMyBatisExecutorFilter;
 import io.microsphere.alibaba.sentinel.spring.boot.autoconfigure.SentinelMyBatisAutoConfiguration.Config;
-import org.junit.jupiter.api.Test;
+import io.microsphere.mybatis.spring.annotation.EnableMyBatisExtension;
+import org.apache.ibatis.session.SqlSessionFactory;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.Set;
 
 /**
  * {@link SentinelMyBatisAutoConfiguration} Test
@@ -33,36 +34,22 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class SentinelMyBatisAutoConfigurationTest extends AutoConfigurationTest<SentinelMyBatisAutoConfiguration> {
 
-    @Test
-    void testDefaults() {
-        this.applicationContextRunner.run(context -> {
-            assertThat(context).hasSingleBean(this.autoConfigurationClass)
-                    .hasSingleBean(Config.class)
-                    .hasSingleBean(SentinelMyBatisExecutorFilter.class);
-        });
+    @Override
+    protected void configureAutoConfiguredClasses(Set<Class<?>> autoConfiguredClasses) {
+        autoConfiguredClasses.add(Config.class);
+        autoConfiguredClasses.add(SentinelMyBatisExecutorFilter.class);
     }
 
-    @Test
-    void tesOntDisabledProperty() {
-        assertDisabledProperty("microsphere.sentinel.enabled=false",
-                this.autoConfigurationClass, Config.class, SentinelMyBatisExecutorFilter.class);
-        assertDisabledProperty("microsphere.mybatis.enabled=false",
-                Config.class, SentinelMyBatisExecutorFilter.class);
-        assertDisabledProperty("microsphere.sentinel.mybatis.enabled=false",
-                this.autoConfigurationClass, Config.class, SentinelMyBatisExecutorFilter.class);
+    @Override
+    protected void configureGlobalDisabledPropertyValues(Set<String> globalDisabledPropertyValues) {
+        globalDisabledPropertyValues.add("microsphere.mybatis.enabled=false");
+        globalDisabledPropertyValues.add("microsphere.sentinel.mybatis.enabled=false");
     }
 
-    @Test
-    void testOnMissingClass() {
-        assertFilteredClass("com.alibaba.csp.sentinel.SphU",
-                this.autoConfigurationClass, Config.class, SentinelMyBatisExecutorFilter.class);
-        assertFilteredClass("io.microsphere.alibaba.sentinel.common.SentinelPlugin",
-                this.autoConfigurationClass, Config.class, SentinelMyBatisExecutorFilter.class);
-        assertFilteredClass("org.apache.ibatis.session.SqlSessionFactory",
-                this.autoConfigurationClass, Config.class, SentinelMyBatisExecutorFilter.class);
-        assertFilteredClass("io.microsphere.mybatis.spring.annotation.EnableMyBatisExtension",
-                this.autoConfigurationClass, Config.class, SentinelMyBatisExecutorFilter.class);
-        assertFilteredClass("io.microsphere.alibaba.sentinel.mybatis.executor.SentinelMyBatisExecutorFilter",
-                this.autoConfigurationClass, Config.class, SentinelMyBatisExecutorFilter.class);
+    @Override
+    protected void configureGlobalMissingClasses(Set<Class<?>> globalMissingClasses) {
+        globalMissingClasses.add(SqlSessionFactory.class);
+        globalMissingClasses.add(EnableMyBatisExtension.class);
+        globalMissingClasses.add(SentinelMyBatisExecutorFilter.class);
     }
 }

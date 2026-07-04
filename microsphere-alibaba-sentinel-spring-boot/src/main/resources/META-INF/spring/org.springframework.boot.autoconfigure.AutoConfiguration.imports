@@ -1,4 +1,4 @@
 io.microsphere.alibaba.sentinel.spring.boot.autoconfigure.SentinelAlibabaDruidAutoConfiguration
 io.microsphere.alibaba.sentinel.spring.boot.autoconfigure.SentinelMyBatisAutoConfiguration
 io.microsphere.alibaba.sentinel.spring.boot.autoconfigure.SentinelRedisAutoConfiguration
-io.microsphere.alibaba.sentinel.spring.boot.autoconfigure.SentinelWebAutoConfiguration
+io.microsphere.alibaba.sentinel.spring.boot.autoconfigure.SentinelSpringWebAutoConfiguration

@@ -9,11 +9,12 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
 
-import static io.microsphere.alibaba.sentinel.redis.SentinelRedisConstants.ENABLED_PROPERTY_NAME;
+
+import static io.microsphere.alibaba.sentinel.spring.web.SentinelSpringWebConstants.ENABLED_PROPERTY_NAME;
 import static org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type.ANY;
 
 /**
- * Microsphere Sentinel Spring Boot Auto-Configuration
+ * The Spring Boot Auto-Configuration class of Alibaba Sentinel x Spring Web
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see com.alibaba.cloud.sentinel.custom.SentinelAutoConfiguration
@@ -29,15 +30,16 @@ import static org.springframework.boot.autoconfigure.condition.ConditionalOnWebA
 @ConditionalOnSentinelAvailable
 @ConditionalOnProperty(name = ENABLED_PROPERTY_NAME, matchIfMissing = true)
 @ConditionalOnClass(name = {
-        "io.microsphere.spring.web.method.support.HandlerMethodInterceptor",                        // Microsphere Spring Web
-        "io.microsphere.alibaba.sentinel.spring.web.SentinelHandlerMethodInterceptor"               // Microsphere Alibaba Sentinel x Spring Web
+        "org.springframework.web.method.HandlerMethod",                                   // Spring Web
+        "io.microsphere.spring.web.method.support.HandlerMethodInterceptor",              // Microsphere Spring Web
+        "io.microsphere.alibaba.sentinel.spring.web.SentinelHandlerMethodInterceptor"     // Microsphere Alibaba Sentinel x Spring Web
 })
 @AutoConfigureAfter(name = {
         "com.alibaba.cloud.sentinel.custom.SentinelAutoConfiguration",                    // Spring Cloud Alibaba Sentinel
         "io.microsphere.spring.boot.webmvc.autoconfigure.WebMvcAutoConfiguration",        // Microsphere Spring Boot WebMVC
         "io.microsphere.spring.boot.webflux.autoconfigure.WebFluxAutoConfiguration"       // Microsphere Spring Boot WebFlux
 })
-public class SentinelWebAutoConfiguration {
+public class SentinelSpringWebAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean

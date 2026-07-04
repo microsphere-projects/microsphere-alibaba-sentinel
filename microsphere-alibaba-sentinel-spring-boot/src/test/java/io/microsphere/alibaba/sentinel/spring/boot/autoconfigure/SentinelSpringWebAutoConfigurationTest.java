@@ -18,47 +18,51 @@
 package io.microsphere.alibaba.sentinel.spring.boot.autoconfigure;
 
 
-import io.microsphere.alibaba.sentinel.redis.spring.SentinelRedisCommandInterceptor;
-import io.microsphere.alibaba.sentinel.spring.boot.autoconfigure.SentinelRedisAutoConfiguration.Config;
-import io.microsphere.redis.metadata.RedisMetadataLoader;
-import io.microsphere.redis.spring.interceptor.RedisMethodInterceptor;
+import io.microsphere.alibaba.sentinel.spring.web.SentinelHandlerMethodInterceptor;
+import io.microsphere.spring.web.method.support.HandlerMethodInterceptor;
 import org.junit.jupiter.api.Test;
-import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.web.method.HandlerMethod;
 
 import java.util.Set;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
- * {@link SentinelRedisAutoConfiguration} Test
+ * {@link SentinelSpringWebAutoConfiguration} Test
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
- * @see SentinelRedisAutoConfiguration
+ * @see SentinelSpringWebAutoConfiguration
  * @since 1.0.0
  */
-class SentinelRedisAutoConfigurationTest extends AutoConfigurationTest<SentinelRedisAutoConfiguration> {
+class SentinelSpringWebAutoConfigurationTest extends AutoConfigurationTest<SentinelSpringWebAutoConfiguration> {
 
     @Test
-    void tesOntDisabledProperty() {
-        assertDisabledProperty("microsphere.redis.interceptor.enabled=false",
-                Config.class, SentinelRedisCommandInterceptor.class);
+    void testAutoConfiguredClasses() {
+        this.applicationContextRunner.run(context -> {
+            assertThat(context).doesNotHaveBean(this.autoConfigurationClass)
+                    .doesNotHaveBean(SentinelHandlerMethodInterceptor.class);
+        });
+
+        this.webApplicationContextRunner.run(context -> {
+            assertThat(context).hasSingleBean(this.autoConfigurationClass)
+                    .hasSingleBean(SentinelHandlerMethodInterceptor.class);
+        });
     }
 
     @Override
     protected void configureAutoConfiguredClasses(Set<Class<?>> autoConfiguredClasses) {
-        autoConfiguredClasses.add(Config.class);
-        autoConfiguredClasses.add(SentinelRedisCommandInterceptor.class);
+        autoConfiguredClasses.add(SentinelHandlerMethodInterceptor.class);
     }
 
     @Override
     protected void configureGlobalDisabledPropertyValues(Set<String> globalDisabledPropertyValues) {
-        globalDisabledPropertyValues.add("microsphere.redis.enabled=false");
-        globalDisabledPropertyValues.add("microsphere.sentinel.redis.enabled=false");
+        globalDisabledPropertyValues.add("microsphere.sentinel.spring-web.enabled=false");
     }
 
     @Override
     protected void configureGlobalMissingClasses(Set<Class<?>> globalMissingClasses) {
-        globalMissingClasses.add(RedisConnection.class);
-        globalMissingClasses.add(RedisMetadataLoader.class);
-        globalMissingClasses.add(RedisMethodInterceptor.class);
-        globalMissingClasses.add(SentinelRedisCommandInterceptor.class);
+        globalMissingClasses.add(HandlerMethod.class);
+        globalMissingClasses.add(HandlerMethodInterceptor.class);
+        globalMissingClasses.add(SentinelHandlerMethodInterceptor.class);
     }
 }

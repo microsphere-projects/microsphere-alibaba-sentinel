@@ -32,7 +32,7 @@ import static io.microsphere.alibaba.sentinel.mybatis.SentinelMyBatisConstants.E
 
 
 /**
- * The Auto-Configuration class of Sentinel x MyBatis
+ *  The Spring Boot Auto-Configuration class of Alibaba Sentinel x MyBatis
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @see com.alibaba.cloud.sentinel.custom.SentinelAutoConfiguration
