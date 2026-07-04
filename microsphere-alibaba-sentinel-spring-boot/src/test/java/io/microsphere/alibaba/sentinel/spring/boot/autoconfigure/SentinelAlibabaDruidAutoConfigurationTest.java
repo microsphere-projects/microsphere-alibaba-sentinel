@@ -65,5 +65,4 @@ class SentinelAlibabaDruidAutoConfigurationTest extends AutoConfigurationTest<Se
         assertFilteredClass("com.alibaba.druid.pool.DruidDataSource",
                 Config.class, SentinelAlibabaDruidFilter.class);
     }
-
 }

@@ -67,22 +67,4 @@ class SentinelMyBatisAutoConfigurationTest extends AutoConfigurationTest<Sentine
         assertFilteredClass("io.microsphere.alibaba.sentinel.mybatis.executor.SentinelMyBatisExecutorFilter",
                 SentinelMyBatisAutoConfiguration.class, Config.class, SentinelMyBatisExecutorFilter.class);
     }
-
-    void assertDisabledProperty(String propertyValue, Class<?>... beanClasses) {
-        this.applicationContextRunner.withPropertyValues(propertyValue)
-                .run(context -> {
-                    for (Class<?> beanClass : beanClasses) {
-                        assertThat(context).doesNotHaveBean(beanClass);
-                    }
-                });
-    }
-
-    void assertFilteredClass(String filteredClass, Class<?>... beanClasses) {
-        this.applicationContextRunner.withClassLoader(new FilteredClassLoader(filteredClass))
-                .run(context -> {
-                    for (Class<?> beanClass : beanClasses) {
-                        assertThat(context).doesNotHaveBean(beanClass);
-                    }
-                });
-    }
 }
