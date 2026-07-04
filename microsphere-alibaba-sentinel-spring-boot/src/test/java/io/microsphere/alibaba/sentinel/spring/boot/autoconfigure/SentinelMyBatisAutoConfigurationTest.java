@@ -38,7 +38,7 @@ class SentinelMyBatisAutoConfigurationTest extends AutoConfigurationTest<Sentine
     @Test
     void testDefaults() {
         this.applicationContextRunner.run(context -> {
-            assertThat(context).hasSingleBean(SentinelMyBatisAutoConfiguration.class)
+            assertThat(context).hasSingleBean(this.autoConfigurationClass)
                     .hasSingleBean(Config.class)
                     .hasSingleBean(SentinelMyBatisExecutorFilter.class);
         });
@@ -47,24 +47,24 @@ class SentinelMyBatisAutoConfigurationTest extends AutoConfigurationTest<Sentine
     @Test
     void tesOntDisabledProperty() {
         assertDisabledProperty("microsphere.sentinel.enabled=false",
-                SentinelMyBatisAutoConfiguration.class, Config.class, SentinelMyBatisExecutorFilter.class);
+                this.autoConfigurationClass, Config.class, SentinelMyBatisExecutorFilter.class);
         assertDisabledProperty("microsphere.mybatis.enabled=false",
                 Config.class, SentinelMyBatisExecutorFilter.class);
         assertDisabledProperty("microsphere.sentinel.mybatis.enabled=false",
-                SentinelMyBatisAutoConfiguration.class, Config.class, SentinelMyBatisExecutorFilter.class);
+                this.autoConfigurationClass, Config.class, SentinelMyBatisExecutorFilter.class);
     }
 
     @Test
     void testOnMissingClass() {
         assertFilteredClass("com.alibaba.csp.sentinel.SphU",
-                SentinelMyBatisAutoConfiguration.class, Config.class, SentinelMyBatisExecutorFilter.class);
+                this.autoConfigurationClass, Config.class, SentinelMyBatisExecutorFilter.class);
         assertFilteredClass("io.microsphere.alibaba.sentinel.common.SentinelPlugin",
-                SentinelMyBatisAutoConfiguration.class, Config.class, SentinelMyBatisExecutorFilter.class);
+                this.autoConfigurationClass, Config.class, SentinelMyBatisExecutorFilter.class);
         assertFilteredClass("org.apache.ibatis.session.SqlSessionFactory",
-                SentinelMyBatisAutoConfiguration.class, Config.class, SentinelMyBatisExecutorFilter.class);
+                this.autoConfigurationClass, Config.class, SentinelMyBatisExecutorFilter.class);
         assertFilteredClass("io.microsphere.mybatis.spring.annotation.EnableMyBatisExtension",
-                SentinelMyBatisAutoConfiguration.class, Config.class, SentinelMyBatisExecutorFilter.class);
+                this.autoConfigurationClass, Config.class, SentinelMyBatisExecutorFilter.class);
         assertFilteredClass("io.microsphere.alibaba.sentinel.mybatis.executor.SentinelMyBatisExecutorFilter",
-                SentinelMyBatisAutoConfiguration.class, Config.class, SentinelMyBatisExecutorFilter.class);
+                this.autoConfigurationClass, Config.class, SentinelMyBatisExecutorFilter.class);
     }
 }

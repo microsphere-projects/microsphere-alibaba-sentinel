@@ -36,7 +36,7 @@ class SentinelAlibabaDruidAutoConfigurationTest extends AutoConfigurationTest<Se
     @Test
     void testDefaults() {
         this.applicationContextRunner.run(context -> {
-            assertThat(context).hasSingleBean(SentinelAlibabaDruidAutoConfiguration.class)
+            assertThat(context).hasSingleBean(this.autoConfigurationClass)
                     .hasSingleBean(Config.class)
                     .hasSingleBean(SentinelAlibabaDruidFilter.class);
         });
@@ -45,9 +45,9 @@ class SentinelAlibabaDruidAutoConfigurationTest extends AutoConfigurationTest<Se
     @Test
     void tesOntDisabledProperty() {
         assertDisabledProperty("microsphere.sentinel.enabled=false",
-                SentinelAlibabaDruidAutoConfiguration.class, Config.class, SentinelAlibabaDruidFilter.class);
+                this.autoConfigurationClass, Config.class, SentinelAlibabaDruidFilter.class);
         assertDisabledProperty("microsphere.sentinel.alibaba-druid.enabled=false",
-                SentinelAlibabaDruidAutoConfiguration.class, Config.class, SentinelAlibabaDruidFilter.class);
+                this.autoConfigurationClass, Config.class, SentinelAlibabaDruidFilter.class);
         assertDisabledProperty("microsphere.alibaba.druid.enabled=false",
                 Config.class, SentinelAlibabaDruidFilter.class);
     }
@@ -55,13 +55,13 @@ class SentinelAlibabaDruidAutoConfigurationTest extends AutoConfigurationTest<Se
     @Test
     void testOnMissingClass() {
         assertFilteredClass("com.alibaba.csp.sentinel.SphU",
-                SentinelAlibabaDruidAutoConfiguration.class, Config.class, SentinelAlibabaDruidFilter.class);
+                this.autoConfigurationClass, Config.class, SentinelAlibabaDruidFilter.class);
         assertFilteredClass("io.microsphere.alibaba.sentinel.common.SentinelPlugin",
-                SentinelAlibabaDruidAutoConfiguration.class, Config.class, SentinelAlibabaDruidFilter.class);
+                this.autoConfigurationClass, Config.class, SentinelAlibabaDruidFilter.class);
         assertFilteredClass("io.microsphere.alibaba.druid.spring.boot.condition.ConditionalOnAlibabaDruidAvailable",
-                SentinelAlibabaDruidAutoConfiguration.class, Config.class, SentinelAlibabaDruidFilter.class);
+                this.autoConfigurationClass, Config.class, SentinelAlibabaDruidFilter.class);
         assertFilteredClass("io.microsphere.alibaba.sentinel.alibaba.druid.SentinelAlibabaDruidFilter",
-                SentinelAlibabaDruidAutoConfiguration.class, Config.class, SentinelAlibabaDruidFilter.class);
+                this.autoConfigurationClass, Config.class, SentinelAlibabaDruidFilter.class);
         assertFilteredClass("com.alibaba.druid.pool.DruidDataSource",
                 Config.class, SentinelAlibabaDruidFilter.class);
     }
