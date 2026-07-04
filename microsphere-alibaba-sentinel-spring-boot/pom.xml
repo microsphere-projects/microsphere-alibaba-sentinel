@@ -179,10 +179,32 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Spring Test -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <!-- Spring Boot Test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Spring Boot Web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Spring Boot WebFlux -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <!-- Microsphere Spring Test -->
@@ -217,6 +239,20 @@
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
             <artifactId>microsphere-redis-spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Microsphere Spring Boot WebMVC -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-spring-boot-webmvc</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Microsphere Spring Boot WebFlux -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-spring-boot-webflux</artifactId>
             <scope>test</scope>
         </dependency>
 

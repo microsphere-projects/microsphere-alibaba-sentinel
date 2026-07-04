@@ -19,6 +19,7 @@ import static io.microsphere.alibaba.sentinel.redis.SentinelRedisConstants.ENABL
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see com.alibaba.cloud.sentinel.custom.SentinelAutoConfiguration
+ * @see org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
  * @since 1.0.0
  */
 @ConditionalOnSentinelAvailable

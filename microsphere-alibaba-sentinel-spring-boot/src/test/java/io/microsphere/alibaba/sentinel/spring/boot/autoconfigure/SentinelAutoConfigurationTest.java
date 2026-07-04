@@ -30,11 +30,10 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.io.IOException;
 
@@ -43,6 +42,7 @@ import static io.microsphere.alibaba.druid.test.AlibabaDruidTestUtils.buildDefau
 import static io.microsphere.mybatis.test.AbstractMapperTest.assertUserMapper;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 /**
  * SentinelAutoConfiguration Test
@@ -53,16 +53,17 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @see SentinelRedisAutoConfiguration
  * @since 1.0.0
  */
-@SpringJUnitConfig(classes = {
+@SpringBootTest(classes = {
         MyBatisDataBaseTestConfiguration.class,
         RedisConfig.class,
-        SentinelAutoConfigurationTest.class
-})
-@TestPropertySource(properties = {
-        "microsphere.redis.enabled=true",
-        "spring.application.name=test-app",
-        "mybatis.configLocation=META-INF/mybatis/config.xml"
-})
+        SentinelAutoConfigurationTest.TestConfig.class
+},
+        webEnvironment = RANDOM_PORT,
+        properties = {
+                "microsphere.redis.enabled=true",
+                "spring.application.name=test-app",
+                "mybatis.configLocation=classpath:/META-INF/mybatis/config.xml"
+        })
 @EnableAutoConfiguration
 class SentinelAutoConfigurationTest {
 
@@ -77,11 +78,6 @@ class SentinelAutoConfigurationTest {
 
     @Autowired
     private SqlSessionFactory sessionFactory;
-
-    @Bean(initMethod = "init", destroyMethod = "close")
-    public DruidDataSource dataSource() throws IOException {
-        return buildDefaultDruidDataSource();
-    }
 
     @Test
     void test() {
@@ -111,5 +107,13 @@ class SentinelAutoConfigurationTest {
 
         Context context = enter("microsphere_sentinel_redis_context", "RedisConnection");
         assertNotNull(context);
+    }
+
+    static class TestConfig {
+
+        @Bean(initMethod = "init", destroyMethod = "close")
+        public DruidDataSource dataSource() throws IOException {
+            return buildDefaultDruidDataSource();
+        }
     }
 }
