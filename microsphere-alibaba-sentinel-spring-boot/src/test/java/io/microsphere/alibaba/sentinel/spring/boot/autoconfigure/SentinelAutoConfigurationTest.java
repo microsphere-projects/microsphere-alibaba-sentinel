@@ -24,6 +24,7 @@ import io.microsphere.alibaba.sentinel.redis.spring.SentinelRedisCommandIntercep
 import io.microsphere.mybatis.spring.test.config.MyBatisDataBaseTestConfiguration;
 import io.microsphere.mybatis.test.mapper.UserMapper;
 import io.microsphere.redis.spring.context.RedisContext;
+import io.microsphere.redis.spring.test.config.RedisConfig;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
