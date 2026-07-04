@@ -50,7 +50,7 @@ public interface SentinelRedisConstants {
     String DEFAULT_ORIGIN = "RedisConnection";
 
     /**
-     * The property name of the plugin of Sentinel x Redis enabled
+     * The property name of the plugin of Sentinel x Redis enabled : "microsphere.sentinel.redis.enabled"
      */
     @ConfigurationProperty(
             type = boolean.class,

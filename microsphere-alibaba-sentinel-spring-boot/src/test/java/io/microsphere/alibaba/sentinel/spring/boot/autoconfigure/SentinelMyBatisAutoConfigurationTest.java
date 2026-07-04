@@ -18,11 +18,9 @@
 package io.microsphere.alibaba.sentinel.spring.boot.autoconfigure;
 
 
-import io.microsphere.alibaba.sentinel.alibaba.druid.SentinelAlibabaDruidFilter;
 import io.microsphere.alibaba.sentinel.mybatis.executor.SentinelMyBatisExecutorFilter;
 import io.microsphere.alibaba.sentinel.spring.boot.autoconfigure.SentinelMyBatisAutoConfiguration.Config;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.FilteredClassLoader;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
