@@ -30,7 +30,7 @@ import org.springframework.context.annotation.Import;
 import static io.microsphere.alibaba.sentinel.alibaba.druid.SentinelAlibabaDruidConstants.ENABLED_PROPERTY_NAME;
 
 /**
- *  The Spring Boot Auto-Configuration class of Alibaba Sentinel x Alibaba Druid
+ * The Spring Boot Auto-Configuration class of Alibaba Sentinel x Alibaba Druid
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @see com.alibaba.cloud.sentinel.custom.SentinelAutoConfiguration
