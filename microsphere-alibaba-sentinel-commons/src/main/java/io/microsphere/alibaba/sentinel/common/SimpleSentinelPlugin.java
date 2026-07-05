@@ -48,7 +48,8 @@ public class SimpleSentinelPlugin extends AbstractSentinelPlugin {
         super(name, contextName, origin, resourceType, trafficType);
     }
 
-    public SimpleSentinelPlugin(String name, String contextName, String origin, int resourceType, EntryType trafficType, boolean autoRegisterMBean) {
-        super(name, contextName, origin, resourceType, trafficType, autoRegisterMBean);
+    public SimpleSentinelPlugin(String name, String contextName, String origin, int resourceType, EntryType trafficType,
+                                boolean autoInstalled) {
+        super(name, contextName, origin, resourceType, trafficType, autoInstalled);
     }
 }

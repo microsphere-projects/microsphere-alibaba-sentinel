@@ -33,7 +33,6 @@ import static io.microsphere.alibaba.sentinel.alibaba.druid.SentinelAlibabaDruid
 import static io.microsphere.alibaba.sentinel.alibaba.druid.SentinelAlibabaDruidConstants.DEFAULT_ORIGIN;
 import static io.microsphere.alibaba.sentinel.alibaba.druid.SentinelAlibabaDruidConstants.PLUGIN_NAME;
 import static io.microsphere.alibaba.sentinel.common.SentinelContext.doInContext;
-import static io.microsphere.alibaba.sentinel.common.SentinelPlugin.install;
 
 /**
  * Sentinel x Alibaba Druid {@link Filter}
@@ -54,9 +53,8 @@ public class SentinelAlibabaDruidFilter extends AbstractStatementFilter implemen
     }
 
     public SentinelAlibabaDruidFilter(String contextName, String origin) {
-        this.delegate = new SimpleSentinelPlugin(PLUGIN_NAME, contextName, origin, COMMON_DB_SQL, IN, false);
+        this.delegate = new SimpleSentinelPlugin(PLUGIN_NAME, contextName, origin, COMMON_DB_SQL, IN, true);
         this.sentinelOperations = new SentinelTemplate(getResourceType(), getTrafficType());
-        install(this);
     }
 
     @Override
