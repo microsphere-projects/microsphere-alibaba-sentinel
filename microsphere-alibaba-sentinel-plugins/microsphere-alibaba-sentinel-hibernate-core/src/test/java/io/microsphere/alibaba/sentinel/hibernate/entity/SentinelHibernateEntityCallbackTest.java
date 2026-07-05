@@ -18,6 +18,7 @@
 package io.microsphere.alibaba.sentinel.hibernate.entity;
 
 import io.microsphere.hibernate.test.AbstractHibernateH2Test;
+import org.junit.jupiter.api.AfterEach;
 
 /**
  * {@link SentinelHibernateEntityCallback} Test
@@ -27,4 +28,8 @@ import io.microsphere.hibernate.test.AbstractHibernateH2Test;
  * @since 1.0.0
  */
 class SentinelHibernateEntityCallbackTest extends AbstractHibernateH2Test {
+
+    @AfterEach
+    void postTest() {
+    }
 }
