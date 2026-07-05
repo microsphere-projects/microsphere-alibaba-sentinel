@@ -17,6 +17,9 @@
 
 package io.microsphere.alibaba.sentinel.spring.web;
 
+import com.alibaba.csp.sentinel.context.Context;
+import com.alibaba.csp.sentinel.node.DefaultNode;
+import com.alibaba.csp.sentinel.node.Node;
 import io.microsphere.spring.test.web.context.request.MockServletWebRequest;
 import io.microsphere.spring.test.webmvc.AbstractWebMvcTest;
 import io.microsphere.spring.webmvc.annotation.EnableWebMvcExtension;
@@ -26,8 +29,14 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import java.util.Set;
+
+import static com.alibaba.csp.sentinel.context.ContextUtil.enter;
+import static com.alibaba.csp.sentinel.context.ContextUtil.exit;
 import static io.microsphere.alibaba.sentinel.spring.web.SentinelHandlerMethodInterceptor.BEAN_NAME;
 import static io.microsphere.alibaba.sentinel.spring.web.SentinelHandlerMethodInterceptor.getSentinelContext;
+import static io.microsphere.alibaba.sentinel.spring.web.SentinelSpringWebConstants.DEFAULT_CONTEXT_NAME;
+import static io.microsphere.alibaba.sentinel.spring.web.SentinelSpringWebConstants.DEFAULT_ORIGIN;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -61,6 +70,7 @@ class SentinelHandlerMethodInterceptorTest extends AbstractWebMvcTest {
     void test() throws Exception {
         this.testHelloWorld();
         this.testGreeting();
+        postTest();
     }
 
     @Test
@@ -77,5 +87,13 @@ class SentinelHandlerMethodInterceptorTest extends AbstractWebMvcTest {
         MockServletWebRequest request = new MockServletWebRequest();
         this.interceptor.afterExecute(null, null, null, null, request);
         assertNull(getSentinelContext(request));
+    }
+
+    void postTest() {
+        Context context = enter(DEFAULT_CONTEXT_NAME, DEFAULT_ORIGIN);
+        DefaultNode entranceNode = context.getEntranceNode();
+        Set<Node> childList = entranceNode.getChildList();
+        assertFalse(childList.isEmpty());
+        exit();
     }
 }
