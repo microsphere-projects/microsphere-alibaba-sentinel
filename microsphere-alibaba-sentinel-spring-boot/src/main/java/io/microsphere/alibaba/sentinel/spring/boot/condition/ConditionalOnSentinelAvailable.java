@@ -36,7 +36,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * only if Sentinel is explicitly enabled and the Sentinel core classes are present on the classpath.
  * </p>
  *
- * <h3>Usage Example</h3>
+ * <h3>Example Usage</h3>
  * <pre>{@code
  * @Configuration
  * @ConditionalOnSentinelAvailiable
@@ -54,8 +54,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 @ConditionalOnSentinelEnabled
 @ConditionalOnClass(name = {
-        "com.alibaba.csp.sentinel.SphU",
-        "io.microsphere.alibaba.sentinel.common.SentinelPlugin"
+        "com.alibaba.csp.sentinel.SphU",                                // Sentinel Core API
+        "io.microsphere.alibaba.sentinel.common.SentinelPlugin"         // Microsphere Sentinel Commons API
 })
 public @interface ConditionalOnSentinelAvailable {
 }
