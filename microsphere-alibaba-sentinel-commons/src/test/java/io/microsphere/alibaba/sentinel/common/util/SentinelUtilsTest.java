@@ -19,6 +19,7 @@ import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getResou
 import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getSentinelMetricsTaskExecutor;
 import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.isPluginEnabled;
 import static io.microsphere.reflect.MethodUtils.findMethod;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -81,5 +82,10 @@ class SentinelUtilsTest {
         assertSame(findSentinelMetricsTaskExecutor(), getSentinelMetricsTaskExecutor());
         assertSame(findSentinelMetricsTaskExecutor(), getSentinelMetricsTaskExecutor());
         assertNotEquals(findSentinelMetricsTaskExecutor(), getSentinelMetricsTaskExecutor(null));
+    }
+
+    @Test
+    void testResetContextMap() {
+        assertDoesNotThrow(SentinelUtils::resetContextMap);
     }
 }

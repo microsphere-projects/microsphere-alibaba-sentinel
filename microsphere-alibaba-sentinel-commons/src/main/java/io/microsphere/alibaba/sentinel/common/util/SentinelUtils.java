@@ -2,9 +2,11 @@ package io.microsphere.alibaba.sentinel.common.util;
 
 import com.alibaba.csp.sentinel.ResourceTypeConstants;
 import com.alibaba.csp.sentinel.concurrent.NamedThreadFactory;
+import com.alibaba.csp.sentinel.context.ContextUtil;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
 import io.microsphere.annotation.Nonnull;
 
+import java.lang.invoke.MethodHandle;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -17,12 +19,16 @@ import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.FLOW_DATA_ID_PATTERN;
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.PROPERTY_NAME_PREFIX;
 import static io.microsphere.collection.MapUtils.newFixedHashMap;
+import static io.microsphere.concurrent.ExecutorUtils.shutdownOnExit;
 import static io.microsphere.constants.PropertyConstants.ENABLED_PROPERTY_NAME;
 import static io.microsphere.constants.SymbolConstants.DOT;
+import static io.microsphere.invoke.MethodHandleUtils.findStatic;
+import static io.microsphere.lang.function.ThrowableAction.execute;
 import static io.microsphere.reflect.FieldUtils.getFieldValue;
 import static io.microsphere.reflect.FieldUtils.getStaticFieldValue;
 import static io.microsphere.text.FormatUtils.format;
 import static io.microsphere.util.ClassUtils.getSimpleName;
+import static io.microsphere.util.ShutdownHookUtils.addShutdownHookCallback;
 import static io.microsphere.util.SystemUtils.getSystemProperty;
 import static java.lang.reflect.Modifier.isStatic;
 import static java.util.concurrent.Executors.newSingleThreadScheduledExecutor;
@@ -37,7 +43,19 @@ public abstract class SentinelUtils {
 
     private static final Map<Integer, String> resourceTypeToLabelMapping = initResourceTypeToLabelMapping();
 
+    /**
+     * The {@link MethodHandle} of {@link ContextUtil#resetContextMap()}
+     *
+     * @see ContextUtil#resetContextMap()
+     */
+    private static final MethodHandle resetContextMapMethodHandle = findStatic(ContextUtil.class, "resetContextMap");
+
     private static volatile ScheduledExecutorService sentinelMetricsTaskExecutor;
+
+    static {
+        shutdownOnExit(sentinelMetricsTaskExecutor);
+        addShutdownHookCallback(() -> execute(SentinelUtils::resetContextMap));
+    }
 
     private static Map<Integer, String> initResourceTypeToLabelMapping() {
         Field[] fields = ResourceTypeConstants.class.getFields();
@@ -151,6 +169,16 @@ public abstract class SentinelUtils {
         }
 
         return scheduledExecutorService;
+    }
+
+    /**
+     * Reset the {@link ContextUtil#resetContextMap() context map} of Sentinel
+     *
+     * @throws Throwable if any exception occurred
+     * @see ContextUtil#resetContextMap()
+     */
+    public static void resetContextMap() throws Throwable {
+        resetContextMapMethodHandle.invokeExact();
     }
 
     static ScheduledExecutorService getSentinelMetricsTaskExecutor(ScheduledExecutorService defaultScheduledExecutorService) {
