@@ -11,47 +11,33 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.microsphere-projects</groupId>
-    <artifactId>microsphere-alibaba-sentinel-spring-boot</artifactId>
+    <artifactId>microsphere-alibaba-sentinel-spring-cloud</artifactId>
     <version>${revision}</version>
     <packaging>jar</packaging>
 
-    <name>Microsphere :: Alibaba Sentinel :: Spring Boot</name>
-    <description>Microsphere Alibaba Sentinel Spring Boot</description>
+    <name>Microsphere :: Alibaba Sentinel :: Spring Cloud</name>
+    <description>Microsphere Alibaba Sentinel Spring Cloud</description>
 
     <dependencies>
 
-        <!-- Microsphere Sentinel Spring -->
+        <!-- Microsphere Sentinel Spring Boot -->
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
-            <artifactId>microsphere-alibaba-sentinel-spring</artifactId>
+            <artifactId>microsphere-alibaba-sentinel-spring-boot</artifactId>
             <version>${revision}</version>
         </dependency>
 
-        <!-- Microsphere Spring Boot Starter -->
+        <!-- Microsphere Spring Cloud -->
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
-            <artifactId>microsphere-spring-boot-core</artifactId>
+            <artifactId>microsphere-spring-cloud-commons</artifactId>
         </dependency>
 
-        <!-- Microsphere Sentinel x Alibaba Druid -->
+        <!-- Microsphere Alibaba Druid Spring Cloud -->
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
-            <artifactId>microsphere-alibaba-sentinel-alibaba-druid</artifactId>
-            <version>${revision}</version>
-        </dependency>
-
-        <!-- Microsphere Alibaba Druid -->
-        <dependency>
-            <groupId>io.github.microsphere-projects</groupId>
-            <artifactId>microsphere-alibaba-druid-spring-boot</artifactId>
+            <artifactId>microsphere-alibaba-druid-spring-cloud</artifactId>
             <optional>true</optional>
-        </dependency>
-
-        <!-- Microsphere Sentinel x Hibernate Core -->
-        <dependency>
-            <groupId>io.github.microsphere-projects</groupId>
-            <artifactId>microsphere-alibaba-sentinel-hibernate-core</artifactId>
-            <version>${revision}</version>
         </dependency>
 
         <!-- Microsphere Hibernate Core -->
@@ -61,39 +47,18 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Microsphere Sentinel x MyBatis -->
+        <!-- Microsphere MyBatis Spring Cloud -->
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
-            <artifactId>microsphere-alibaba-sentinel-mybatis</artifactId>
-            <version>${revision}</version>
-        </dependency>
-
-        <!-- Microsphere MyBatis Spring Boot -->
-        <dependency>
-            <groupId>io.github.microsphere-projects</groupId>
-            <artifactId>microsphere-mybatis-spring-boot</artifactId>
+            <artifactId>microsphere-mybatis-spring-cloud</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <!-- Microsphere Sentinel x Redis -->
+        <!-- Microsphere Redis Spring Cloud -->
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
-            <artifactId>microsphere-alibaba-sentinel-redis</artifactId>
-            <version>${revision}</version>
-        </dependency>
-
-        <!-- Microsphere Redis Spring Boot -->
-        <dependency>
-            <groupId>io.github.microsphere-projects</groupId>
-            <artifactId>microsphere-redis-spring-boot</artifactId>
+            <artifactId>microsphere-redis-spring-cloud</artifactId>
             <optional>true</optional>
-        </dependency>
-
-        <!-- Microsphere Sentinel x Spring Web -->
-        <dependency>
-            <groupId>io.github.microsphere-projects</groupId>
-            <artifactId>microsphere-alibaba-sentinel-spring-web</artifactId>
-            <version>${revision}</version>
         </dependency>
 
         <!-- Microsphere Spring Boot Web MVC -->
