@@ -17,12 +17,23 @@
 
 package io.microsphere.alibaba.sentinel.mybatis.executor;
 
+import com.alibaba.csp.sentinel.context.Context;
+import com.alibaba.csp.sentinel.node.DefaultNode;
+import com.alibaba.csp.sentinel.node.Node;
 import io.microsphere.mybatis.plugin.InterceptingExecutorInterceptor;
 import io.microsphere.mybatis.test.AbstractMapperTest;
 import org.apache.ibatis.session.Configuration;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Set;
+
+import static com.alibaba.csp.sentinel.context.ContextUtil.enter;
+import static com.alibaba.csp.sentinel.context.ContextUtil.exit;
+import static io.microsphere.alibaba.sentinel.mybatis.SentinelMyBatisConstants.DEFAULT_CONTEXT_NAME;
+import static io.microsphere.alibaba.sentinel.mybatis.SentinelMyBatisConstants.DEFAULT_ORIGIN;
 import static io.microsphere.util.ArrayUtils.ofArray;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * {@link SentinelMyBatisExecutorFilter} Test
@@ -46,5 +57,14 @@ class SentinelMyBatisExecutorFilterTest extends AbstractMapperTest {
     void testDisabled() throws Throwable {
         this.filter.setEnabled(false);
         super.testMapper();
+    }
+
+    @AfterEach
+    void postTest() {
+        Context context = enter(DEFAULT_CONTEXT_NAME, DEFAULT_ORIGIN);
+        DefaultNode entranceNode = context.getEntranceNode();
+        Set<Node> childList = entranceNode.getChildList();
+        assertFalse(childList.isEmpty());
+        exit();
     }
 }
