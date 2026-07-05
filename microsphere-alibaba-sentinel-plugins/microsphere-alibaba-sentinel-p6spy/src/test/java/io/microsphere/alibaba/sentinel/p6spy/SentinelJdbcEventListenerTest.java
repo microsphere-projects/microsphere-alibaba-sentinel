@@ -17,10 +17,18 @@
 
 package io.microsphere.alibaba.sentinel.p6spy;
 
+import com.alibaba.csp.sentinel.context.Context;
+import com.alibaba.csp.sentinel.node.DefaultNode;
+import com.alibaba.csp.sentinel.node.Node;
 import com.alibaba.druid.pool.DruidDataSource;
 import io.microsphere.alibaba.druid.test.AbstractAlibabaDruidTest;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Set;
+
+import static com.alibaba.csp.sentinel.context.ContextUtil.enter;
+import static com.alibaba.csp.sentinel.context.ContextUtil.exit;
 import static io.microsphere.alibaba.sentinel.p6spy.SentinelP6SpyConstants.DEFAULT_CONTEXT_NAME;
 import static io.microsphere.alibaba.sentinel.p6spy.SentinelP6SpyConstants.DEFAULT_ORIGIN;
 import static io.microsphere.alibaba.sentinel.p6spy.SentinelP6SpyConstants.PLUGIN_NAME;
@@ -63,5 +71,14 @@ class SentinelJdbcEventListenerTest extends AbstractAlibabaDruidTest {
         listener.onBeforeAnyExecute(null);
         listener.onAfterAnyExecute(null, 0L, null);
         assertFalse(listener.isEnabled());
+    }
+
+    @AfterEach
+    void postTest() {
+        Context context = enter(DEFAULT_CONTEXT_NAME, DEFAULT_ORIGIN);
+        DefaultNode entranceNode = context.getEntranceNode();
+        Set<Node> childList = entranceNode.getChildList();
+        assertFalse(childList.isEmpty());
+        exit();
     }
 }
