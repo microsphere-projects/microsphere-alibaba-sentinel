@@ -17,14 +17,18 @@
 
 package io.microsphere.alibaba.sentinel.alibaba.druid;
 
+import com.alibaba.csp.sentinel.context.Context;
 import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.pool.DruidDataSource;
 import io.microsphere.alibaba.druid.test.AbstractAlibabaDruidTest;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static com.alibaba.csp.sentinel.context.ContextUtil.enter;
 import static io.microsphere.alibaba.sentinel.alibaba.druid.SentinelAlibabaDruidConstants.PLUGIN_NAME;
+import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.resetContextMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -37,21 +41,34 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class SentinelAlibabaDruidFilterTest extends AbstractAlibabaDruidTest {
 
+    private final SentinelAlibabaDruidFilter filter = new SentinelAlibabaDruidFilter();
+
+    @BeforeEach
+    void setUp() throws Throwable {
+        resetContextMap();
+    }
+
     @Override
     protected void customize(DruidDataSource dataSource) {
-        dataSource.getProxyFilters().add(new SentinelAlibabaDruidFilter());
+        dataSource.getProxyFilters().add(filter);
     }
 
     @Test
     void testEnable() throws Throwable {
         setEnable(true);
         super.test();
+
+        Context context = enter(filter.getContextName(), filter.getOrigin());
+        assertEquals("microsphere_sentinel_alibaba_druid_context", context.getName());
     }
 
     @Test
     void testDisable() throws Throwable {
         setEnable(false);
         super.test();
+
+        Context context = enter(filter.getContextName(), filter.getOrigin());
+        assertEquals("microsphere_sentinel_alibaba_druid_context", context.getName());
     }
 
     void setEnable(boolean enabled) {
