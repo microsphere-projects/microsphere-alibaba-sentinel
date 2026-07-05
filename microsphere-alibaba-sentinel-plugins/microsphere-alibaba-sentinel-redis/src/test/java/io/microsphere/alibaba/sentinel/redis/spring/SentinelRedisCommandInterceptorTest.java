@@ -17,10 +17,13 @@
 
 package io.microsphere.alibaba.sentinel.redis.spring;
 
-import io.microsphere.alibaba.sentinel.redis.spring.test.RedisConfig;
+import com.alibaba.csp.sentinel.context.Context;
+import com.alibaba.csp.sentinel.node.DefaultNode;
+import com.alibaba.csp.sentinel.node.Node;
 import io.microsphere.redis.spring.annotation.EnableRedisInterceptor;
 import io.microsphere.redis.spring.context.RedisContext;
 import io.microsphere.redis.spring.interceptor.RedisMethodContext;
+import io.microsphere.redis.spring.test.config.RedisConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -29,8 +32,13 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.lang.reflect.Method;
+import java.util.Set;
 
+import static com.alibaba.csp.sentinel.context.ContextUtil.enter;
+import static com.alibaba.csp.sentinel.context.ContextUtil.exit;
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.DEFAULT_PRIORITY;
+import static io.microsphere.alibaba.sentinel.redis.SentinelRedisConstants.DEFAULT_CONTEXT_NAME;
+import static io.microsphere.alibaba.sentinel.redis.SentinelRedisConstants.DEFAULT_ORIGIN;
 import static io.microsphere.util.ArrayUtils.ofArray;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -72,6 +80,7 @@ class SentinelRedisCommandInterceptorTest {
         valueOperations.set(key, value);
         assertEquals(value, valueOperations.get(key));
         assertEquals(DEFAULT_PRIORITY, interceptor.getOrder());
+        postTest();
     }
 
     @Test
@@ -89,5 +98,13 @@ class SentinelRedisCommandInterceptorTest {
         RedisMethodContext context = new RedisMethodContext(this.stringRedisTemplate, method, ofArray(), this.redisContext);
         assertDoesNotThrow(() -> this.interceptor.beforeExecute(context));
         assertDoesNotThrow(() -> this.interceptor.afterExecute(context, null, null));
+    }
+
+    void postTest() {
+        Context context = enter(DEFAULT_CONTEXT_NAME, DEFAULT_ORIGIN);
+        DefaultNode entranceNode = context.getEntranceNode();
+        Set<Node> childList = entranceNode.getChildList();
+        assertFalse(childList.isEmpty());
+        exit();
     }
 }

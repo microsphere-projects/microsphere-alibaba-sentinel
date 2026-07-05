@@ -78,6 +78,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Microsphere Redis Spring Test -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-redis-spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <!-- Spring Test -->
         <dependency>
             <groupId>org.springframework</groupId>
