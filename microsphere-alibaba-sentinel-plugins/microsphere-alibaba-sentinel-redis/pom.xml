@@ -41,10 +41,10 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Microsphere Spring -->
+        <!-- Microsphere Spring Context -->
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
-            <artifactId>microsphere-spring</artifactId>
+            <artifactId>microsphere-spring-context</artifactId>
             <optional>true</optional>
         </dependency>
 
