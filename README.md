@@ -66,8 +66,8 @@ pom.xml:
 
 | **Branches** | **Purpose**                                      | **Latest Version** |
 |--------------|--------------------------------------------------|--------------------|
-| **main**     | Compatible with Spring Cloud 2022.0.x - 2025.0.x | 0.2.0              |
-| **1.x**      | Compatible with Spring Cloud Hoxton - 2021.0.x   | 0.1.0              |
+| **main**     | Compatible with Spring Cloud 2022.0.x - 2025.0.x | `0.2.0`            |
+| **1.x**      | Compatible with Spring Cloud Hoxton - 2021.0.x   | `0.1.0`            |
 
 ## Building from Source
 
