@@ -41,6 +41,9 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Run Docker Compose
+        run: docker compose -f "docker/test-services.yml" up -d
+
       - name: Publish package
         run: ./mvnw
           --batch-mode
