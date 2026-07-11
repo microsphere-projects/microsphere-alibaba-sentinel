@@ -41,6 +41,13 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Microsphere Spring -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-spring</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!-- Third-Party Dependencies -->
 
         <!-- Alibaba Sentinel -->
