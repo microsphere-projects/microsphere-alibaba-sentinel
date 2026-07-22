@@ -77,7 +77,7 @@ class SentinelNodeEventPublisherTest {
         this.sentinelNodeEventPublisher.addEventListener(listener);
 
         ExecutorService executorService = newFixedThreadPool(2);
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < this.times; i++) {
             executorService.submit(this::execute);
         }
 
