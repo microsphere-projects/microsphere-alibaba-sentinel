@@ -18,21 +18,13 @@
 package io.microsphere.alibaba.sentinel.event;
 
 
-import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
-import io.microsphere.alibaba.sentinel.common.SentinelTemplate;
+import io.microsphere.alibaba.sentinel.test.AbstractSentinelTemplateTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
 
-import static com.alibaba.csp.sentinel.slots.block.RuleConstant.FLOW_GRADE_THREAD;
-import static com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager.loadRules;
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.DEFAULT_CONTEXT_NAME;
-import static io.microsphere.collection.ListUtils.newArrayList;
-import static java.lang.Thread.sleep;
-import static java.util.concurrent.Executors.newFixedThreadPool;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -42,26 +34,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @see SentinelNodeEventPublisher
  * @since 1.0.0
  */
-class SentinelNodeEventPublisherTest {
+class SentinelNodeEventPublisherTest extends AbstractSentinelTemplateTest {
 
     private SentinelNodeEventPublisher sentinelNodeEventPublisher;
-
-    private SentinelTemplate sentinelTemplate;
-
-    private String resourceNamePrefix = "test-resource-";
-
-    private int times = 100;
 
     @BeforeEach
     void setUp() {
         this.sentinelNodeEventPublisher = new SentinelNodeEventPublisher();
-        this.sentinelTemplate = new SentinelTemplate();
     }
 
     @Test
     void test() throws InterruptedException {
-
-        initFlowRule(this.times);
 
         CountDownLatch countDownLatch = new CountDownLatch(this.times);
 
@@ -76,44 +59,10 @@ class SentinelNodeEventPublisherTest {
 
         this.sentinelNodeEventPublisher.addEventListener(listener);
 
-        ExecutorService executorService = newFixedThreadPool(2);
-        for (int i = 0; i < this.times; i++) {
-            executorService.submit(this::execute);
-        }
+        super.executeInParallel(2, 10);
 
         countDownLatch.await();
-        executorService.shutdown();
 
         this.sentinelNodeEventPublisher.removeEventListener(listener);
-    }
-
-    private void execute() {
-        for (int i = 0; i < this.times; i++) {
-            String resourceName = resourceName(i);
-            sentinelTemplate.execute(resourceName, () -> {
-                try {
-                    sleep(1);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-        }
-    }
-
-    private String resourceName(int index) {
-        return resourceNamePrefix + (index + 1);
-    }
-
-    private void initFlowRule(int times) {
-        List<FlowRule> rules = newArrayList(times);
-        for (int i = 0; i < times; i++) {
-            FlowRule rule = new FlowRule();
-            rule.setResource(this.resourceName(i));
-            rule.setCount(1);
-            rule.setGrade(FLOW_GRADE_THREAD);
-            rule.setLimitApp("default");
-            rules.add(rule);
-        }
-        loadRules(rules);
     }
 }

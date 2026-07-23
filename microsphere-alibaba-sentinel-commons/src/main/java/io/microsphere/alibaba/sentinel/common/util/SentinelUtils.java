@@ -187,7 +187,7 @@ public abstract class SentinelUtils {
     public static void resetContextMap() throws Throwable {
         resetContextMapMethodHandle.invokeExact();
     }
-    
+
     /**
      * Get the {@link MetricSearcher} of Sentinel Metrics
      *
