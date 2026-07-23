@@ -20,26 +20,23 @@ package io.microsphere.alibaba.sentinel.event;
 import com.alibaba.csp.sentinel.context.Context;
 import com.alibaba.csp.sentinel.node.ClusterNode;
 import com.alibaba.csp.sentinel.node.DefaultNode;
-import com.alibaba.csp.sentinel.node.EntranceNode;
 import com.alibaba.csp.sentinel.node.Node;
 import com.alibaba.csp.sentinel.slotchain.ProcessorSlotEntryCallback;
 import com.alibaba.csp.sentinel.slotchain.ResourceWrapper;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.alibaba.csp.sentinel.slots.clusterbuilder.ClusterBuilderSlot;
+import com.alibaba.csp.sentinel.slots.nodeselector.NodeSelectorSlot;
+import com.alibaba.csp.sentinel.slots.statistic.StatisticSlot;
 import io.microsphere.annotation.Nullable;
 import io.microsphere.event.EventDispatcher;
 
-import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.Executor;
-import java.util.concurrent.ScheduledExecutorService;
 
-import static com.alibaba.csp.sentinel.Constants.ROOT;
 import static com.alibaba.csp.sentinel.slots.statistic.StatisticSlotCallbackRegistry.addEntryCallback;
-import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getSentinelMetricsTaskExecutor;
 import static io.microsphere.collection.MapUtils.newConcurrentHashMap;
 import static io.microsphere.event.EventDispatcher.newDefault;
 import static io.microsphere.event.EventDispatcher.parallel;
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 /**
  * The Event Publisher of Alibaba Sentinel's {@link Node}
@@ -49,16 +46,12 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
  * @see DefaultNode
  * @see ClusterNodeAddedEvent
  * @see ClusterNodeAddedEventListener
+ * @see NodeSelectorSlot
+ * @see ClusterBuilderSlot
+ * @see StatisticSlot
  * @since 1.0.0
  */
-public class SentinelNodeEventPublisher implements Runnable, ProcessorSlotEntryCallback<DefaultNode> {
-
-    /**
-     * The interval time of metrics collection in milliseconds.
-     */
-    private final long interval;
-
-    private final ScheduledExecutorService scheduler;
+public class SentinelNodeEventPublisher implements ProcessorSlotEntryCallback<DefaultNode> {
 
     private final EventDispatcher eventDispatcher;
 
@@ -67,13 +60,11 @@ public class SentinelNodeEventPublisher implements Runnable, ProcessorSlotEntryC
      */
     private final ConcurrentMap<String, ClusterNode> processedResourceClusterNodes = newConcurrentHashMap(256);
 
-    public SentinelNodeEventPublisher(long interval) {
-        this(interval, null);
+    public SentinelNodeEventPublisher() {
+        this(null);
     }
 
-    public SentinelNodeEventPublisher(long interval, @Nullable Executor eventDispatcherExecutor) {
-        this.interval = interval;
-        this.scheduler = initScheduler();
+    public SentinelNodeEventPublisher(@Nullable Executor eventDispatcherExecutor) {
         this.eventDispatcher = eventDispatcherExecutor == null ? newDefault() : parallel(eventDispatcherExecutor);
         addEntryCallback(getClass().getName(), this);
     }
@@ -90,61 +81,26 @@ public class SentinelNodeEventPublisher implements Runnable, ProcessorSlotEntryC
 
     @Override
     public void onPass(Context context, ResourceWrapper resourceWrapper, DefaultNode node, int count, Object... args) {
-        addNodeAsync(context, resourceWrapper, node);
+        addNodeIfAbsent(context, resourceWrapper, node);
     }
 
     @Override
     public void onBlocked(BlockException ex, Context context, ResourceWrapper resourceWrapper, DefaultNode node, int count, Object... args) {
-        addNodeAsync(context, resourceWrapper, node);
+        addNodeIfAbsent(context, resourceWrapper, node);
     }
 
-    @Override
-    public void run() {
-        addNode(ROOT);
+    private void addNodeIfAbsent(Context context, ResourceWrapper resourceWrapper, DefaultNode node) {
+        String contextName = context.getName();
+        String resourceName = resourceWrapper.getName();
+        addNodeIfAbsent(contextName, resourceName, node);
     }
 
-    private ScheduledExecutorService initScheduler() {
-        ScheduledExecutorService scheduledExecutorService = getSentinelMetricsTaskExecutor();
-        scheduledExecutorService.scheduleAtFixedRate(this, 0, this.interval, MILLISECONDS);
-        return scheduledExecutorService;
-    }
-
-    private void addNodeAsync(Context context, ResourceWrapper resourceWrapper, DefaultNode node) {
-        this.scheduler.execute(() -> {
-            String contextName = context.getName();
-            String resourceName = resourceWrapper.getName();
-            addNode(contextName, resourceName, node);
-        });
-    }
-
-    private void addNode(DefaultNode currentNode) {
-        for (Node node : currentNode.getChildList()) {
-            if (node instanceof DefaultNode childNode) {
-                String resourceName = getResourceName(currentNode);
-                String childResourceName = getResourceName(childNode);
-                if (node instanceof EntranceNode) {
-                    addNode(childNode);
-                }
-                String contextName = resourceName;
-                addNode(contextName, childResourceName, childNode);
-            }
-        }
-    }
-
-    private String getResourceName(DefaultNode node) {
-        return node.getId().getName();
-    }
-
-    void addNode(String contextName, String resourceName, DefaultNode node) {
-        if (contextName == null || resourceName == null || node == null) {
-            return;
-        }
+    void addNodeIfAbsent(String contextName, String resourceName, DefaultNode node) {
         ClusterNode clusterNode = node.getClusterNode();
-        ClusterNode processedClusterNode = processedResourceClusterNodes.get(resourceName);
-        if (!Objects.equals(processedClusterNode, clusterNode)) {
+        this.processedResourceClusterNodes.computeIfAbsent(resourceName, key -> {
             onClusterNodeAdded(contextName, resourceName, clusterNode);
-            processedResourceClusterNodes.put(resourceName, clusterNode);
-        }
+            return clusterNode;
+        });
     }
 
     protected void onClusterNodeAdded(String contextName, String resourceName, ClusterNode clusterNode) {

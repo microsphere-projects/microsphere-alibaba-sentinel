@@ -54,7 +54,7 @@ class SentinelNodeEventPublisherTest {
 
     @BeforeEach
     void setUp() {
-        this.sentinelNodeEventPublisher = new SentinelNodeEventPublisher(50);
+        this.sentinelNodeEventPublisher = new SentinelNodeEventPublisher();
         this.sentinelTemplate = new SentinelTemplate();
     }
 
@@ -85,13 +85,6 @@ class SentinelNodeEventPublisherTest {
         executorService.shutdown();
 
         this.sentinelNodeEventPublisher.removeEventListener(listener);
-    }
-
-    @Test
-    void testAddNodeOnNulling() {
-        this.sentinelNodeEventPublisher.addNode(null, null, null);
-        this.sentinelNodeEventPublisher.addNode("contextName", null, null);
-        this.sentinelNodeEventPublisher.addNode("contextName", "resourceName", null);
     }
 
     private void execute() {
