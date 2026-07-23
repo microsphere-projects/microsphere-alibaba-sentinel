@@ -14,6 +14,7 @@ import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.buildRes
 import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.findSentinelMetricsTaskExecutor;
 import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getDefaultContextName;
 import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getFlowDataId;
+import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getMetricSearcher;
 import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getPluginEnabledPropertyName;
 import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getResourceTypeAsString;
 import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getSentinelMetricsTaskExecutor;
@@ -87,5 +88,11 @@ class SentinelUtilsTest {
     @Test
     void testResetContextMap() {
         assertDoesNotThrow(SentinelUtils::resetContextMap);
+    }
+
+    @Test
+    void testGetMetricSearcher() {
+        assertNotNull(getMetricSearcher());
+        assertNotNull(getMetricSearcher());
     }
 }

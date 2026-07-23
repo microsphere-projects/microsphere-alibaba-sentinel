@@ -3,6 +3,7 @@ package io.microsphere.alibaba.sentinel.common.util;
 import com.alibaba.csp.sentinel.ResourceTypeConstants;
 import com.alibaba.csp.sentinel.concurrent.NamedThreadFactory;
 import com.alibaba.csp.sentinel.context.ContextUtil;
+import com.alibaba.csp.sentinel.node.metric.MetricSearcher;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
 import io.microsphere.annotation.Nonnull;
 
@@ -15,6 +16,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadFactory;
 
+import static com.alibaba.csp.sentinel.config.SentinelConfig.getAppName;
+import static com.alibaba.csp.sentinel.node.metric.MetricWriter.METRIC_BASE_DIR;
+import static com.alibaba.csp.sentinel.node.metric.MetricWriter.formMetricFileName;
+import static com.alibaba.csp.sentinel.util.PidUtil.getPid;
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.DEFAULT_CONTEXT_NAME_PATTERN;
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.FLOW_DATA_ID_PATTERN;
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.PROPERTY_NAME_PREFIX;
@@ -51,6 +56,8 @@ public abstract class SentinelUtils {
     private static final MethodHandle resetContextMapMethodHandle = findStatic(ContextUtil.class, "resetContextMap");
 
     private static volatile ScheduledExecutorService sentinelMetricsTaskExecutor;
+
+    private static volatile MetricSearcher metricSearcher;
 
     static {
         shutdownOnExit(sentinelMetricsTaskExecutor);
@@ -179,6 +186,38 @@ public abstract class SentinelUtils {
      */
     public static void resetContextMap() throws Throwable {
         resetContextMapMethodHandle.invokeExact();
+    }
+    
+    /**
+     * Get the {@link MetricSearcher} of Sentinel Metrics
+     *
+     * @return non-null
+     */
+    @Nonnull
+    public static MetricSearcher getMetricSearcher() {
+        MetricSearcher metricSearcher = SentinelUtils.metricSearcher;
+        if (metricSearcher == null) {
+            synchronized (SentinelUtils.class) {
+                metricSearcher = SentinelUtils.metricSearcher;
+                if (metricSearcher == null) {
+                    metricSearcher = newMetricSearcher();
+                    SentinelUtils.metricSearcher = metricSearcher;
+                }
+            }
+        }
+        return metricSearcher;
+    }
+
+    /**
+     * Create a new {@link MetricSearcher} instance
+     *
+     * @return non-null
+     */
+    @Nonnull
+    public static MetricSearcher newMetricSearcher() {
+        String appName = getAppName();
+        int pid = getPid();
+        return new MetricSearcher(METRIC_BASE_DIR, formMetricFileName(appName, pid));
     }
 
     static ScheduledExecutorService getSentinelMetricsTaskExecutor(ScheduledExecutorService defaultScheduledExecutorService) {
