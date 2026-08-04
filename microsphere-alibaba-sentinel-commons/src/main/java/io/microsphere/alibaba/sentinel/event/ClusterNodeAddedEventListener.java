@@ -28,5 +28,6 @@ import io.microsphere.event.EventListener;
  * @see ClusterNodeAddedEvent
  * @since 1.0.0
  */
+@FunctionalInterface
 public interface ClusterNodeAddedEventListener extends EventListener<ClusterNodeAddedEvent> {
 }
