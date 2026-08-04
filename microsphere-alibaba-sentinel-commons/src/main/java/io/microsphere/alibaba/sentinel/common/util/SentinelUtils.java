@@ -29,7 +29,6 @@ import static io.microsphere.constants.PropertyConstants.ENABLED_PROPERTY_NAME;
 import static io.microsphere.constants.SymbolConstants.DOT;
 import static io.microsphere.invoke.MethodHandleUtils.findStatic;
 import static io.microsphere.lang.function.ThrowableAction.execute;
-import static io.microsphere.reflect.FieldUtils.getFieldValue;
 import static io.microsphere.reflect.FieldUtils.getStaticFieldValue;
 import static io.microsphere.text.FormatUtils.format;
 import static io.microsphere.util.ClassUtils.getSimpleName;
@@ -69,7 +68,7 @@ public abstract class SentinelUtils {
         Map<Integer, String> resourceTypeToLabelMapping = newFixedHashMap(fields.length);
         for (Field field : fields) {
             if (isStatic(field.getModifiers())) {
-                Integer value = getFieldValue(null, field);
+                Integer value = getStaticFieldValue(true, field);
                 resourceTypeToLabelMapping.put(value, field.getName());
             }
         }
@@ -156,7 +155,7 @@ public abstract class SentinelUtils {
      * @see FlowRuleManager#SCHEDULER
      */
     public static ScheduledExecutorService findSentinelMetricsTaskExecutor() {
-        return getStaticFieldValue(FlowRuleManager.class, "SCHEDULER");
+        return getStaticFieldValue(true, FlowRuleManager.class, "SCHEDULER");
     }
 
     /**
