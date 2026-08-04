@@ -48,13 +48,10 @@ class SentinelNodeEventPublisherTest extends AbstractSentinelTemplateTest {
 
         CountDownLatch countDownLatch = new CountDownLatch(this.times);
 
-        ClusterNodeAddedEventListener listener = new ClusterNodeAddedEventListener() {
-            @Override
-            public void onEvent(ClusterNodeAddedEvent event) {
-                assertEquals(DEFAULT_CONTEXT_NAME, event.getContextName());
-                assertEquals(event.getResourceName(), event.getClusterNode().getName());
-                countDownLatch.countDown();
-            }
+        ClusterNodeAddedEventListener listener = event -> {
+            assertEquals(DEFAULT_CONTEXT_NAME, event.getContextName());
+            assertEquals(event.getResourceName(), event.getClusterNode().getName());
+            countDownLatch.countDown();
         };
 
         this.sentinelNodeEventPublisher.addEventListener(listener);
