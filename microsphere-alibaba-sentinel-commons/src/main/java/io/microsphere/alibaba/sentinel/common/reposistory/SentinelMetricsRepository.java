@@ -36,7 +36,6 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;
 
 import static com.alibaba.csp.sentinel.Constants.CONTEXT_DEFAULT_NAME;
-import static com.alibaba.csp.sentinel.slots.statistic.StatisticSlotCallbackRegistry.addEntryCallback;
 import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getMetricSearcher;
 import static io.microsphere.collection.CollectionUtils.isEmpty;
 import static io.microsphere.collection.MapUtils.newConcurrentHashMap;
@@ -65,7 +64,6 @@ public class SentinelMetricsRepository implements ProcessorSlotEntryCallback<Def
 
     public SentinelMetricsRepository() {
         this.metricSearcher = getMetricSearcher();
-        addEntryCallback(getClass().getName(), this);
     }
 
     @Override

@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.DEFAULT_CONTEXT_NAME;
+import static io.microsphere.alibaba.sentinel.common.util.ProcessorSlotCallbackUtils.addEntryCallback;
 import static java.lang.System.currentTimeMillis;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -50,6 +51,7 @@ class SentinelMetricsRepositoryTest extends AbstractSentinelTemplateTest {
     void setUp() {
         this.startTime = currentTimeMillis();
         this.sentinelMetricsRepository = new SentinelMetricsRepository();
+        addEntryCallback(this.sentinelMetricsRepository);
     }
 
     @Test

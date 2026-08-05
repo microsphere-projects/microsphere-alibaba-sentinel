@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Test;
 import java.util.concurrent.CountDownLatch;
 
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.DEFAULT_CONTEXT_NAME;
+import static io.microsphere.alibaba.sentinel.common.util.ProcessorSlotCallbackUtils.addEntryCallback;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -41,6 +42,7 @@ class SentinelNodeEventPublisherTest extends AbstractSentinelTemplateTest {
     @BeforeEach
     void setUp() {
         this.sentinelNodeEventPublisher = new SentinelNodeEventPublisher();
+        addEntryCallback(this.sentinelNodeEventPublisher);
     }
 
     @Test
