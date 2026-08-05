@@ -28,8 +28,9 @@ import org.junit.jupiter.api.Test;
 
 import static com.alibaba.csp.sentinel.slots.statistic.StatisticSlotCallbackRegistry.clearEntryCallback;
 import static com.alibaba.csp.sentinel.slots.statistic.StatisticSlotCallbackRegistry.clearExitCallback;
-import static io.microsphere.alibaba.sentinel.common.util.ProcessorSlotCallbackUtils.addEntryCallback;
+import static io.microsphere.alibaba.sentinel.common.util.ProcessorSlotCallbackUtils.addEntryCallbacks;
 import static io.microsphere.alibaba.sentinel.common.util.ProcessorSlotCallbackUtils.addExitCallback;
+import static io.microsphere.alibaba.sentinel.common.util.ProcessorSlotCallbackUtils.addExitCallbacks;
 import static io.microsphere.alibaba.sentinel.common.util.ProcessorSlotCallbackUtils.getEntryCallback;
 import static io.microsphere.alibaba.sentinel.common.util.ProcessorSlotCallbackUtils.getExitCallback;
 import static io.microsphere.alibaba.sentinel.common.util.ProcessorSlotCallbackUtils.removeEntryCallback;
@@ -72,8 +73,7 @@ class ProcessorSlotCallbackUtilsTest {
         assertNull(getEntryCallback(SentinelMetricsRepository.class));
         assertNull(getEntryCallback(SentinelNodeEventPublisher.class));
 
-        addEntryCallback(this.sentinelMetricsRepository);
-        addEntryCallback(this.sentinelNodeEventPublisher);
+        addEntryCallbacks(this.sentinelMetricsRepository, this.sentinelNodeEventPublisher);
 
         assertSame(this.sentinelMetricsRepository, getEntryCallback(SentinelMetricsRepository.class));
         assertSame(this.sentinelMetricsRepository, removeEntryCallback(SentinelMetricsRepository.class));
@@ -89,7 +89,7 @@ class ProcessorSlotCallbackUtilsTest {
         assertNull(getExitCallback(MetricExitCallback.class));
 
         MetricExitCallback metricExitCallback = new MetricExitCallback();
-        addExitCallback(metricExitCallback);
+        addExitCallbacks(metricExitCallback);
 
         assertSame(metricExitCallback, getExitCallback(MetricExitCallback.class));
         assertSame(metricExitCallback, removeExitCallback(MetricExitCallback.class));

@@ -26,6 +26,7 @@ import io.microsphere.util.Utils;
 import java.util.Collection;
 
 import static com.alibaba.csp.sentinel.slots.statistic.StatisticSlotCallbackRegistry.getEntryCallbacks;
+import static io.microsphere.collection.Lists.ofList;
 import static io.microsphere.util.ClassUtils.getTypeName;
 
 /**
@@ -38,6 +39,26 @@ import static io.microsphere.util.ClassUtils.getTypeName;
  * @since 1.0.0
  */
 public abstract class ProcessorSlotCallbackUtils implements Utils {
+
+    public static void addEntryCallbacks(ProcessorSlotEntryCallback<DefaultNode>... callbacks) {
+        addEntryCallbacks(ofList(callbacks));
+    }
+
+    public static void addExitCallbacks(ProcessorSlotExitCallback... callbacks) {
+        addExitCallbacks(ofList(callbacks));
+    }
+
+    public static void addEntryCallbacks(Iterable<? extends ProcessorSlotEntryCallback<DefaultNode>> callbacks) {
+        for (ProcessorSlotEntryCallback<DefaultNode> callback : callbacks) {
+            addEntryCallback(callback);
+        }
+    }
+
+    public static void addExitCallbacks(Iterable<? extends ProcessorSlotExitCallback> callbacks) {
+        for (ProcessorSlotExitCallback callback : callbacks) {
+            addExitCallback(callback);
+        }
+    }
 
     public static void addEntryCallback(ProcessorSlotEntryCallback<DefaultNode> callback) {
         StatisticSlotCallbackRegistry.addEntryCallback(key(callback), callback);

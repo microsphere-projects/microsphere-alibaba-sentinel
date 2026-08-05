@@ -81,4 +81,22 @@ ac90fdc chore: merge release into main [skip ci]
 bec41b9 chore: bump version to next patch after publishing 0.2.0
 ```
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-sentinel/compare/0.2.0...0.2.1
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-sentinel/compare/0.2.0...0.2.1## v0.2.2
+
+_Release notes generation failed. Raw commits since 0.2.1:_
+
+```
+8821190 Update README.md
+18c3eb7 chore: merge main into release [skip ci]
+a874497 Add singleton accessors for callbacks
+5c1498e chore: merge main into release [skip ci]
+42bf61c Refactor Sentinel callback registration
+17ff2bc chore: merge main into release [skip ci]
+4c9971b Mark cluster node listener as functional interface
+5cd1abe chore: merge main into release [skip ci]
+8d5b774 Use EventDispatcher.of in node publisher
+731b078 chore: bump version to next patch after publishing 0.2.1
+f937fb7 chore: merge release into main [skip ci]
+```
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-sentinel/compare/0.2.1...0.2.2

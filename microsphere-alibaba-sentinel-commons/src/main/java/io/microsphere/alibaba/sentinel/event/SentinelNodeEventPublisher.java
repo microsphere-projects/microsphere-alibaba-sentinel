@@ -21,12 +21,13 @@ import com.alibaba.csp.sentinel.context.Context;
 import com.alibaba.csp.sentinel.node.ClusterNode;
 import com.alibaba.csp.sentinel.node.DefaultNode;
 import com.alibaba.csp.sentinel.node.Node;
-import com.alibaba.csp.sentinel.slotchain.ProcessorSlotEntryCallback;
 import com.alibaba.csp.sentinel.slotchain.ResourceWrapper;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.csp.sentinel.slots.clusterbuilder.ClusterBuilderSlot;
 import com.alibaba.csp.sentinel.slots.nodeselector.NodeSelectorSlot;
 import com.alibaba.csp.sentinel.slots.statistic.StatisticSlot;
+import com.alibaba.csp.sentinel.spi.Spi;
+import io.microsphere.alibaba.sentinel.common.callback.DefaultNodeEntryCallback;
 import io.microsphere.annotation.Nullable;
 import io.microsphere.event.EventDispatcher;
 
@@ -41,7 +42,7 @@ import static io.microsphere.event.EventDispatcher.of;
  * The Event Publisher of Alibaba Sentinel's {@link Node}
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
- * @see ProcessorSlotEntryCallback
+ * @see DefaultNodeEntryCallback
  * @see DefaultNode
  * @see ClusterNodeAddedEvent
  * @see ClusterNodeAddedEventListener
@@ -50,7 +51,8 @@ import static io.microsphere.event.EventDispatcher.of;
  * @see StatisticSlot
  * @since 1.0.0
  */
-public class SentinelNodeEventPublisher implements ProcessorSlotEntryCallback<DefaultNode> {
+@Spi
+public class SentinelNodeEventPublisher implements DefaultNodeEntryCallback {
 
     private final EventDispatcher eventDispatcher;
 
