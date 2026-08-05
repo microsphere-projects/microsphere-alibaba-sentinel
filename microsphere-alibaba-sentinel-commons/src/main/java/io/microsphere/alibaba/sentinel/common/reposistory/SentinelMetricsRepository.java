@@ -25,6 +25,7 @@ import com.alibaba.csp.sentinel.slotchain.ProcessorSlotEntryCallback;
 import com.alibaba.csp.sentinel.slotchain.ResourceWrapper;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import io.microsphere.annotation.Nonnull;
+import io.microsphere.annotation.Nullable;
 import io.microsphere.lang.function.ThrowableFunction;
 import io.microsphere.logging.Logger;
 
@@ -36,6 +37,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;
 
 import static com.alibaba.csp.sentinel.Constants.CONTEXT_DEFAULT_NAME;
+import static io.microsphere.alibaba.sentinel.common.util.ProcessorSlotCallbackUtils.getEntryCallback;
 import static io.microsphere.alibaba.sentinel.common.util.SentinelUtils.getMetricSearcher;
 import static io.microsphere.collection.CollectionUtils.isEmpty;
 import static io.microsphere.collection.MapUtils.newConcurrentHashMap;
@@ -180,5 +182,15 @@ public class SentinelMetricsRepository implements ProcessorSlotEntryCallback<Def
     private void updateResourceToContextMapping(String context, DefaultNode node) {
         String resource = getResource(node);
         resourceToContextMapping.putIfAbsent(resource, context);
+    }
+
+    /**
+     * Get the singleton instance of {@link SentinelMetricsRepository}
+     *
+     * @return the singleton instance of {@link SentinelMetricsRepository}
+     */
+    @Nullable
+    public static SentinelMetricsRepository getSentinelMetricsRepository() {
+        return getEntryCallback(SentinelMetricsRepository.class);
     }
 }

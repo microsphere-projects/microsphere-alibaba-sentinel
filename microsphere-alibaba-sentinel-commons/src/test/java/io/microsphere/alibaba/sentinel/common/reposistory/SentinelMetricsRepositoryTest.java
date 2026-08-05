@@ -27,11 +27,13 @@ import java.util.List;
 import java.util.Map;
 
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.DEFAULT_CONTEXT_NAME;
+import static io.microsphere.alibaba.sentinel.common.reposistory.SentinelMetricsRepository.getSentinelMetricsRepository;
 import static io.microsphere.alibaba.sentinel.common.util.ProcessorSlotCallbackUtils.addEntryCallback;
 import static java.lang.System.currentTimeMillis;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -72,6 +74,8 @@ class SentinelMetricsRepositoryTest extends AbstractSentinelTemplateTest {
 
         metricNodes = this.sentinelMetricsRepository.findMetricNodes(this.startTime, 10);
         assertFalse(metricNodes.isEmpty());
+
+        assertSame(this.sentinelMetricsRepository, getSentinelMetricsRepository());
     }
 
     @Test

@@ -26,7 +26,9 @@ import java.util.concurrent.CountDownLatch;
 
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.DEFAULT_CONTEXT_NAME;
 import static io.microsphere.alibaba.sentinel.common.util.ProcessorSlotCallbackUtils.addEntryCallback;
+import static io.microsphere.alibaba.sentinel.event.SentinelNodeEventPublisher.getSentinelNodeEventPublisher;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 /**
  * {@link SentinelNodeEventPublisher} Test
@@ -63,5 +65,7 @@ class SentinelNodeEventPublisherTest extends AbstractSentinelTemplateTest {
         countDownLatch.await();
 
         this.sentinelNodeEventPublisher.removeEventListener(listener);
+
+        assertSame(this.sentinelNodeEventPublisher, getSentinelNodeEventPublisher());
     }
 }

@@ -33,6 +33,7 @@ import io.microsphere.event.EventDispatcher;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.Executor;
 
+import static io.microsphere.alibaba.sentinel.common.util.ProcessorSlotCallbackUtils.getEntryCallback;
 import static io.microsphere.collection.MapUtils.newConcurrentHashMap;
 import static io.microsphere.event.EventDispatcher.of;
 
@@ -102,5 +103,15 @@ public class SentinelNodeEventPublisher implements ProcessorSlotEntryCallback<De
 
     protected void onClusterNodeAdded(String contextName, String resourceName, ClusterNode clusterNode) {
         this.eventDispatcher.dispatch(new ClusterNodeAddedEvent(clusterNode, contextName, resourceName));
+    }
+
+    /**
+     * Get the singleton instance of {@link SentinelNodeEventPublisher}
+     *
+     * @return the singleton instance of {@link SentinelNodeEventPublisher}
+     */
+    @Nullable
+    public static SentinelNodeEventPublisher getSentinelNodeEventPublisher() {
+        return getEntryCallback(SentinelNodeEventPublisher.class);
     }
 }
