@@ -27,7 +27,7 @@
         <microsphere-redis.version>0.2.13</microsphere-redis.version>
         <!-- Third-party versions -->
         <sentinel.version>1.8.10</sentinel.version>
-        <fastjson.version>2.0.63</fastjson.version>
+        <fastjson.version>2.0.64</fastjson.version>
     </properties>
 
     <dependencyManagement>

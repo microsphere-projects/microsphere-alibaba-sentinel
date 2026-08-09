@@ -99,4 +99,18 @@ a874497 Add singleton accessors for callbacks
 f937fb7 chore: merge release into main [skip ci]
 ```
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-sentinel/compare/0.2.1...0.2.2
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-sentinel/compare/0.2.1...0.2.2## v0.2.3
+
+_Release notes generation failed. Raw commits since 0.2.2:_
+
+```
+10115a6 Update version numbers in README.md
+b983a02 chore: merge main into release [skip ci]
+9026dbd Register Sentinel components as SPI
+658cb0f Use DefaultNodeEntryCallback
+4e8cdc2 Add SPI loader for Sentinel callbacks
+8e0000d chore: merge release into main [skip ci]
+16428e9 chore: bump version to next patch after publishing 0.2.2
+```
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-sentinel/compare/0.2.2...0.2.3
