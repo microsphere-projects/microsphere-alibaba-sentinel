@@ -113,4 +113,17 @@ b983a02 chore: merge main into release [skip ci]
 16428e9 chore: bump version to next patch after publishing 0.2.2
 ```
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-sentinel/compare/0.2.2...0.2.3
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-sentinel/compare/0.2.2...0.2.3## v0.2.4
+
+_Release notes generation failed. Raw commits since 0.2.3:_
+
+```
+2ae3604 Update README.md
+976a143 chore: merge main into release [skip ci]
+2969e9d Merge pull request #57 from microsphere-projects/dependabot/maven/com.alibaba-fastjson-2.0.64
+85803ba Bump com.alibaba:fastjson from 2.0.63 to 2.0.64
+5170016 chore: merge release into main [skip ci]
+6a34ad6 chore: bump version to next patch after publishing 0.2.3
+```
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-sentinel/compare/0.2.3...0.2.4
