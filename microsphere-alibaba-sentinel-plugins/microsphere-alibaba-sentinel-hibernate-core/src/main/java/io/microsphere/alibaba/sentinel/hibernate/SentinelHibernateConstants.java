@@ -49,7 +49,7 @@ public interface SentinelHibernateConstants {
     String DEFAULT_ORIGIN = "SessionFactory";
 
     /**
-     * The property name of the plugin of Sentinel x Hibernate enabled
+     * The property name of the plugin of Sentinel x Hibernate enabled : "microsphere.sentinel.hibernate.enabled"
      */
     @ConfigurationProperty(
             type = boolean.class,
