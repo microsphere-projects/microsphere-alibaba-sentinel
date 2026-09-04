@@ -126,4 +126,21 @@ _Release notes generation failed. Raw commits since 0.2.3:_
 6a34ad6 chore: bump version to next patch after publishing 0.2.3
 ```
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-sentinel/compare/0.2.3...0.2.4
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-sentinel/compare/0.2.3...0.2.4## v0.2.5
+
+_Release notes generation failed. Raw commits since 0.2.4:_
+
+```
+8f80af1 Update version numbers in README.md
+12d1f8c chore: merge main into release [skip ci]
+e669f25 Bump microsphere-spring-cloud to 0.2.26
+33323b4 chore: merge main into release [skip ci]
+54489df Clarify Hibernate enabled property Javadoc
+ad369f4 chore: merge main into release [skip ci]
+fc3a63e Merge pull request #58 from microsphere-projects/dependabot/maven/org.apache.maven-apache-maven-3.9.16
+01bf066 Bump org.apache.maven:apache-maven from 3.9.15 to 3.9.16
+1ffe565 chore: merge release into main [skip ci]
+62d983f chore: bump version to next patch after publishing 0.2.4
+```
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-sentinel/compare/0.2.4...0.2.5
