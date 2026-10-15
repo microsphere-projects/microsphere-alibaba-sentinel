@@ -110,9 +110,20 @@ We welcome your contributions! Please read [Code of Conduct](./CODE_OF_CONDUCT.m
 
 ## Documentation
 
+The full documentation set lives in the [docs](./docs/README.md) directory ([中文](./docs/zh/README.md)), written
+against the `release` (docs dir `current`, `0.2.x`) and `release-1.x` (docs dir `1.x`, `0.1.x`) branches, one document
+per Maven module.
+
 ### User Guide
 
-[DeepWiki Host](https://deepwiki.com/microsphere-projects/microsphere-alibaba-sentinel)
+- Repository host: [User Guide](./docs/user-guide/README.md) ([中文](./docs/user-guide/zh/README.md)) —
+  [current / 0.2.x](./docs/user-guide/current/README.md) · [1.x / 0.1.x](./docs/user-guide/1.x/README.md)
+- DeepWiki Host: [DeepWiki](https://deepwiki.com/microsphere-projects/microsphere-alibaba-sentinel)
+
+### Developer Guide
+
+- Repository host: [Developer Guide](./docs/developer-guide/README.md) ([中文](./docs/developer-guide/zh/README.md)) —
+  [current / 0.2.x](./docs/developer-guide/current/README.md) · [1.x / 0.1.x](./docs/developer-guide/1.x/README.md)
 
 ### Wiki
 
