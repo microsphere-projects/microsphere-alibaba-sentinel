@@ -77,6 +77,16 @@ graph TD
     BOM -. version management for consumers .- SC
 ```
 
+## 源码对比
+
+按 Maven 模块逐一比较各 tag 之间 `src/main` 与 `src/test` 内容的对比文档位于
+[`diff/source/`](../diff/source/)。文档已排除 Java 8 与 Java 17 的语法/API 差异、Java EE 与 Jakarta EE API 差异，
+表格中仅保留真正的实现差异及其原因说明。
+
+| 版本对 | `src/main` 对比 | `src/test` 对比 |
+|---|---|---|
+| `0.1.5` vs `0.2.5`（最新两个 tag，Java 8 线 vs Java 17 线） | [main-diff-0.1.5-vs-0.2.5.zh.md](../diff/source/main-diff-0.1.5-vs-0.2.5.zh.md) · [English](../diff/source/main-diff-0.1.5-vs-0.2.5.md) | [test-diff-0.1.5-vs-0.2.5.zh.md](../diff/source/test-diff-0.1.5-vs-0.2.5.zh.md) · [English](../diff/source/test-diff-0.1.5-vs-0.2.5.md) |
+
 ## 按角色快速开始
 
 - 初次接触本库 → [用户指南 · current 分支](../user-guide/current/zh/README.md)，建议从
