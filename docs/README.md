@@ -79,6 +79,16 @@ graph TD
     BOM -. version management for consumers .- SC
 ```
 
+## Source diff comparisons
+
+Module-by-module comparisons of the `src/main` and `src/test` content between tagged releases live in
+[`diff/source/`](diff/source/). Java 8 ↔ Java 17 syntax/API differences and Java EE ↔ Jakarta EE API differences are
+excluded, so each table lists only genuine implementation changes with their reasons.
+
+| Release pair | `src/main` diff | `src/test` diff |
+|---|---|---|
+| `0.1.5` vs `0.2.5` (latest tags, Java 8 line vs Java 17 line) | [main-diff-0.1.5-vs-0.2.5.md](diff/source/main-diff-0.1.5-vs-0.2.5.md) · [中文](diff/source/main-diff-0.1.5-vs-0.2.5.zh.md) | [test-diff-0.1.5-vs-0.2.5.md](diff/source/test-diff-0.1.5-vs-0.2.5.md) · [中文](diff/source/test-diff-0.1.5-vs-0.2.5.zh.md) |
+
 ## Quick start by role
 
 - New to the library → [User Guide, current branch](user-guide/current/README.md), starting with
