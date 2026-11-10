@@ -1,3 +1,19 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package io.microsphere.alibaba.sentinel.common.util;
 
 import com.alibaba.csp.sentinel.ResourceTypeConstants;
@@ -24,7 +40,6 @@ import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.FLOW_DATA_ID_PATTERN;
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.PROPERTY_NAME_PREFIX;
 import static io.microsphere.collection.MapUtils.newFixedHashMap;
-import static io.microsphere.concurrent.ExecutorUtils.shutdownOnExit;
 import static io.microsphere.constants.PropertyConstants.ENABLED_PROPERTY_NAME;
 import static io.microsphere.constants.SymbolConstants.DOT;
 import static io.microsphere.invoke.MethodHandleUtils.findStatic;
@@ -59,7 +74,14 @@ public abstract class SentinelUtils {
     private static volatile MetricSearcher metricSearcher;
 
     static {
-        shutdownOnExit(sentinelMetricsTaskExecutor);
+        // Shutdown the lazily-initialized executor at JVM exit : the field is null
+        // at class-initialization time, so it must be read when the hook runs
+        addShutdownHookCallback(() -> {
+            ScheduledExecutorService executor = sentinelMetricsTaskExecutor;
+            if (executor != null) {
+                execute(executor::shutdown);
+            }
+        });
         addShutdownHookCallback(() -> execute(SentinelUtils::resetContextMap));
     }
 
@@ -115,6 +137,11 @@ public abstract class SentinelUtils {
 
     /**
      * Is the plugin enabled ?
+     * <p>
+     * NOTE : The Java System Property is read on every invocation (no caching), so the
+     * result reflects the latest property value, e.g., it can be toggled at runtime via
+     * {@link System#setProperty(String, String)}. If the property is absent, the plugin
+     * is enabled by default.
      *
      * @param pluginName the name of plugin
      * @return the <code>true</code> as default, otherwise set the Java System Property to be "false" , is like
@@ -170,8 +197,13 @@ public abstract class SentinelUtils {
         ScheduledExecutorService scheduledExecutorService = sentinelMetricsTaskExecutor;
 
         if (scheduledExecutorService == null) {
-            scheduledExecutorService = getSentinelMetricsTaskExecutor(findSentinelMetricsTaskExecutor());
-            sentinelMetricsTaskExecutor = scheduledExecutorService;
+            synchronized (SentinelUtils.class) {
+                scheduledExecutorService = sentinelMetricsTaskExecutor;
+                if (scheduledExecutorService == null) {
+                    scheduledExecutorService = getSentinelMetricsTaskExecutor(findSentinelMetricsTaskExecutor());
+                    sentinelMetricsTaskExecutor = scheduledExecutorService;
+                }
+            }
         }
 
         return scheduledExecutorService;

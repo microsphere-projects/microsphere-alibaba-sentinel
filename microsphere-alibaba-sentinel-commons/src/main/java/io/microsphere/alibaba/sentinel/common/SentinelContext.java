@@ -211,6 +211,21 @@ public class SentinelContext {
     }
 
     /**
+     * Get the attribute value by name and type.
+     *
+     * @param name          the attribute name
+     * @param attributeType the expected type of the attribute value
+     * @param <T>           the type of the attribute value
+     * @return the attribute value if found and assignable to the given type,
+     * otherwise <code>null</code>
+     */
+    public <T> T getAttribute(String name, Class<T> attributeType) {
+        Map<String, Object> attributes = getOrCreateAttributes();
+        Object value = attributes.get(name);
+        return attributeType.isInstance(value) ? attributeType.cast(value) : null;
+    }
+
+    /**
      * Remove the attribute by name.
      *
      * @param name the attribute name

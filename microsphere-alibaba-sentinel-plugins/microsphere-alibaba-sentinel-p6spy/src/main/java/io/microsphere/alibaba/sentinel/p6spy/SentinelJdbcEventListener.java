@@ -29,6 +29,7 @@ import io.microsphere.alibaba.sentinel.common.SimpleSentinelPlugin;
 import io.microsphere.logging.Logger;
 
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 
 import static com.alibaba.csp.sentinel.EntryType.IN;
 import static com.alibaba.csp.sentinel.ResourceTypeConstants.COMMON_DB_SQL;
@@ -47,6 +48,38 @@ import static io.microsphere.logging.LoggerFactory.getLogger;
  * @since 1.0.0
  */
 public class SentinelJdbcEventListener extends SimpleJdbcEventListener implements SentinelPlugin {
+
+    /**
+     * The resource name prefix for JDBC statements : "jdbc:"
+     */
+    public static final String RESOURCE_NAME_PREFIX = "jdbc:";
+
+    /**
+     * The maximum length of the normalized SQL resource name, which is used to bound
+     * the resource cardinality so that the Sentinel statistics structures (e.g., ClusterNode)
+     * will not grow unboundedly
+     */
+    public static final int MAX_RESOURCE_NAME_LENGTH = 256;
+
+    /**
+     * The pattern of the single-quoted string literals (e.g., 'value', 'O''Brien')
+     */
+    private static final Pattern SINGLE_QUOTED_LITERAL_PATTERN = Pattern.compile("'(?:''|[^'])*'");
+
+    /**
+     * The pattern of the double-quoted identifiers/literals (e.g., "name")
+     */
+    private static final Pattern DOUBLE_QUOTED_LITERAL_PATTERN = Pattern.compile("\"[^\"]*\"");
+
+    /**
+     * The pattern of the numeric literals (e.g., 123, 1.5)
+     */
+    private static final Pattern NUMERIC_LITERAL_PATTERN = Pattern.compile("\\b\\d+(?:\\.\\d+)?\\b");
+
+    /**
+     * The pattern of the consecutive whitespaces
+     */
+    private static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\s+");
 
     private static final Logger logger = getLogger(SentinelJdbcEventListener.class);
 
@@ -79,20 +112,57 @@ public class SentinelJdbcEventListener extends SimpleJdbcEventListener implement
 
     @Override
     public void onAfterAnyExecute(StatementInformation statementInformation, long timeElapsedNanos, SQLException e) {
-        if (isEnabled()) {
-            if (isEligibleStatement(statementInformation)) {
-                doInContext(context -> {
-                    context.setFailure(e);
-                    this.sentinelOperations.end(context);
-                }, true);
-            }
+        // The cleanup path must be unconditional : if the plugin is disabled between
+        // onBeforeAnyExecute and onAfterAnyExecute, the SentinelContext still needs to
+        // be ended to exit the Entry and clean up the ThreadLocal
+        if (isEligibleStatement(statementInformation)) {
+            doInContext(context -> {
+                context.setFailure(e);
+                this.sentinelOperations.end(context);
+            }, true);
         }
     }
 
+    /**
+     * Get the Sentinel resource name for the specified {@link StatementInformation}.
+     * <p>
+     * The raw SQL is normalized (literals are replaced with {@code ?} placeholders,
+     * whitespaces are collapsed and the length is truncated) to bound the resource
+     * cardinality, so that the Sentinel statistics structures (e.g., {@code ClusterNode})
+     * will not grow unboundedly, and the sensitive data carried in the SQL literals
+     * will not be exposed to the monitoring surfaces.
+     *
+     * @param statementInformation the {@link StatementInformation}
+     * @return the normalized resource name, e.g., "jdbc:SELECT * FROM users WHERE id = ?"
+     */
     protected String getResourceName(StatementInformation statementInformation) {
-        String resourceName = statementInformation.getSql();
+        String sql = statementInformation.getSql();
+        String resourceName = sql == null || sql.isEmpty() ? RESOURCE_NAME_PREFIX + "unknown" : RESOURCE_NAME_PREFIX + normalizeSql(sql);
         logger.trace("Sentinel JDBC StatementInformation resource[name : '{}']", resourceName);
         return resourceName;
+    }
+
+    /**
+     * Normalize the SQL to bound the resource cardinality :
+     * <ul>
+     *     <li>The single/double-quoted literals are replaced with {@code ?}</li>
+     *     <li>The numeric literals are replaced with {@code ?}</li>
+     *     <li>The consecutive whitespaces are collapsed into a single space</li>
+     *     <li>The result is truncated if its length exceeds {@link #MAX_RESOURCE_NAME_LENGTH}</li>
+     * </ul>
+     *
+     * @param sql the raw SQL
+     * @return the normalized SQL
+     */
+    protected String normalizeSql(String sql) {
+        String normalized = SINGLE_QUOTED_LITERAL_PATTERN.matcher(sql).replaceAll("?");
+        normalized = DOUBLE_QUOTED_LITERAL_PATTERN.matcher(normalized).replaceAll("?");
+        normalized = NUMERIC_LITERAL_PATTERN.matcher(normalized).replaceAll("?");
+        normalized = WHITESPACE_PATTERN.matcher(normalized).replaceAll(" ").trim();
+        if (normalized.length() > MAX_RESOURCE_NAME_LENGTH) {
+            normalized = normalized.substring(0, MAX_RESOURCE_NAME_LENGTH) + "...";
+        }
+        return normalized;
     }
 
     /**

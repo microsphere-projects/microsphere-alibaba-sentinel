@@ -37,24 +37,26 @@ import static io.microsphere.util.ExceptionUtils.throwTarget;
  *     <li>One-Time Operations :
  *      <ul>
  *          <li>execution with result:
- *                  <ul>
- *                      <li>{@link #call(String, String, String, ThrowableFunction)}</li>
- *                      <li>{@link #execute(String, String, String, Function)}</li>
- *                  </ul>
+ *              <ul>
+ *                  <li>{@link #call(String, String, String, ThrowableFunction)}</li>
+ *                  <li>{@link #execute(String, String, String, Function)}</li>
+ *              </ul>
  *          </li>
  *          <li>execution without result:
- *                 <ul>
- *                     <li>{@link #call(String, String, String, ThrowableAction)}</li>
- *                     <li>{@link #call(String, String, String, ThrowableConsumer)}</li>
- *                     <li>{@link #execute(String, String, String, Runnable)}</li>
- *                     <li>{@link #execute(String, String, String, Consumer)}</li>
- *                 </ul>
+ *              <ul>
+ *                  <li>{@link #call(String, String, String, ThrowableAction)}</li>
+ *                  <li>{@link #call(String, String, String, ThrowableConsumer)}</li>
+ *                  <li>{@link #execute(String, String, String, Runnable)}</li>
+ *                  <li>{@link #execute(String, String, String, Consumer)}</li>
+ *              </ul>
  *          </li>
  *      </ul>
  *     </li>
  *     <li>Two-Phase Operations :
- *        <li>{@link #begin(String, String, String) the first phase}</li>
- *        <li>{@link #end(SentinelContext) the second phase}</li>
+ *      <ul>
+ *          <li>{@link #begin(String, String, String) the first phase}</li>
+ *          <li>{@link #end(SentinelContext) the second phase}</li>
+ *      </ul>
  *     </li>
  * </ul>
  *
@@ -239,12 +241,19 @@ public interface SentinelOperations {
         try {
             return callback.apply(context);
         } catch (Throwable e) {
-            if (!isBlockException(e)) {
+            if (isBlockException(e)) {
+                // BlockException is the normal flow-control result of Sentinel rather than
+                // a failure, thus it's traced as a block event without noisy error logs
+                Logger logger = getLogger(this.getClass());
+                if (logger.isDebugEnabled()) {
+                    logger.debug("The callback '{}' of Sentinel resource[name : '{}'] was blocked", callback, resourceName);
+                }
+            } else {
                 trace(e);
-            }
-            Logger logger = getLogger(this.getClass());
-            if (logger.isErrorEnabled()) {
-                logger.error("A callback '{}' of Sentinel context[name :'{}' , origin : '{}'] resource[name :'{}'] execution is failed", callback, contextName, origin, resourceName, e);
+                Logger logger = getLogger(this.getClass());
+                if (logger.isErrorEnabled()) {
+                    logger.error("A callback '{}' of Sentinel context[name :'{}' , origin : '{}'] resource[name :'{}'] execution is failed", callback, contextName, origin, resourceName, e);
+                }
             }
             throw e;
         } finally {

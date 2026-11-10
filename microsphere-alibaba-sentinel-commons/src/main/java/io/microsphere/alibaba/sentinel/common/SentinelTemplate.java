@@ -69,7 +69,15 @@ public class SentinelTemplate implements SentinelOperations {
                     contextName, actualContextName, origin, actualOrigin, resourceName, this.resourceType, this.trafficType);
         }
         enter(actualContextName, actualOrigin);
-        Entry entry = entry(resourceName, this.resourceType, this.trafficType);
+        Entry entry;
+        try {
+            entry = entry(resourceName, this.resourceType, this.trafficType);
+        } catch (Throwable t) {
+            // Rollback the Context that has been entered to avoid the Context leak
+            // when the entry is blocked (e.g., BlockException) or failed
+            exit();
+            throw t;
+        }
         return new SentinelContext(resourceName, actualContextName, actualOrigin, entry);
     }
 

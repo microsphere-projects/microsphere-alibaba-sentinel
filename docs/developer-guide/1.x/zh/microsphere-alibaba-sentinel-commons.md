@@ -204,7 +204,7 @@ SPI 接口，带一个由 ServiceLoader 解析出的单例：
 `@FunctionalInterface extends EventListener<ClusterNodeAddedEvent>`。`SentinelNodeEventPublisherTest`
 验证了在两个并行线程下每个资源只派发一次。
 
-`common/reposistory/SentinelMetricsRepository.java`（已发布的包名确实拼作 `reposistory`）标注 `@Spi` 并
+`common/repository/SentinelMetricsRepository.java`（包名已修正为 `repository`）标注 `@Spi` 并
 `implements DefaultNodeEntryCallback`：`onPass`/`onBlocked` → `resourceToContextMapping.putIfAbsent(resource, context)`
 （首个上下文胜出，`ConcurrentHashMap` 容量 256）；`getContext(String)` 默认返回
 `Constants.CONTEXT_DEFAULT_NAME`；构造器捕获 `SentinelUtils.getMetricSearcher()`。

@@ -159,7 +159,7 @@ check-then-act 方式缓存进 `volatile` 字段（无害：两个写入方解�
 继承 `io.microsphere.event.Event`，以 `ClusterNode` 作为 source 并附带 `contextName`/`resourceName`；`event/ClusterNodeAddedEventListener.java` 是一个
 `@FunctionalInterface extends EventListener<ClusterNodeAddedEvent>`。`SentinelNodeEventPublisherTest` 在两个并行线程上验证每个资源只派发一次。
 
-`common/reposistory/SentinelMetricsRepository.java`（对外发布的包名确实拼作 `reposistory`）带有 `@Spi` 并 `implements DefaultNodeEntryCallback`：
+`common/repository/SentinelMetricsRepository.java`（包名已修正为 `repository`）带有 `@Spi` 并 `implements DefaultNodeEntryCallback`：
 `onPass`/`onBlocked` → `resourceToContextMapping.putIfAbsent(resource, context)`（首个上下文胜出，`ConcurrentHashMap` 容量 256），`getContext(String)` 默认
 返回 `Constants.CONTEXT_DEFAULT_NAME`，构造器捕获 `SentinelUtils.getMetricSearcher()`。`findMetricNodes(long, int)`、`findMetricNodes(long, long)`
 和 `findMetricNodes(long, long, String)` 都经由受保护的

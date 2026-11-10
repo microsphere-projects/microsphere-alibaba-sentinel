@@ -69,13 +69,14 @@ public class SentinelAlibabaDruidFilter extends AbstractStatementFilter implemen
 
     @Override
     protected void afterExecute(StatementProxy statement, String resourceName, Object result, Throwable failure) {
-        if (isEnabled()) {
-            doInContext(context -> {
-                context.setResult(result);
-                context.setFailure(failure);
-                this.sentinelOperations.end(context);
-            }, true);
-        }
+        // The cleanup path must be unconditional : if the plugin is disabled between
+        // beforeExecute and afterExecute, the SentinelContext still needs to be ended
+        // to exit the Entry and clean up the ThreadLocal
+        doInContext(context -> {
+            context.setResult(result);
+            context.setFailure(failure);
+            this.sentinelOperations.end(context);
+        }, true);
     }
 
     @Override

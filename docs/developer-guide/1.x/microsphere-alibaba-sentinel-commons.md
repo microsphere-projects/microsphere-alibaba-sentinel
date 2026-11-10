@@ -163,7 +163,7 @@ at most one `ClusterNodeAddedEvent` per resource name (the key ignores the conte
 extends `io.microsphere.event.Event` with the `ClusterNode` as source plus `contextName`/`resourceName`; `event/ClusterNodeAddedEventListener.java` is a
 `@FunctionalInterface extends EventListener<ClusterNodeAddedEvent>`. `SentinelNodeEventPublisherTest` verifies once-per-resource dispatch across two parallel threads.
 
-`common/reposistory/SentinelMetricsRepository.java` (the published package name really is `reposistory`) is `@Spi` and `implements DefaultNodeEntryCallback`:
+`common/repository/SentinelMetricsRepository.java` (package name corrected to `repository`) is `@Spi` and `implements DefaultNodeEntryCallback`:
 `onPass`/`onBlocked` → `resourceToContextMapping.putIfAbsent(resource, context)` (first context wins, `ConcurrentHashMap` sized 256), `getContext(String)` defaults
 to `Constants.CONTEXT_DEFAULT_NAME`, and the constructor captures `SentinelUtils.getMetricSearcher()`. `findMetricNodes(long, int)`, `findMetricNodes(long, long)`
 and `findMetricNodes(long, long, String)` route through the protected

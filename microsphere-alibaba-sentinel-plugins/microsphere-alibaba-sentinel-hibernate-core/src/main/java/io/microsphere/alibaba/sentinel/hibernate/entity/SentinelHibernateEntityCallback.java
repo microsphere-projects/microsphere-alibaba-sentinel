@@ -158,9 +158,10 @@ public class SentinelHibernateEntityCallback implements EntityCallback, Sentinel
     }
 
     protected void end() {
-        if (isEnabled()) {
-            doInContext(this.sentinelOperations::end, true);
-        }
+        // The cleanup path must be unconditional : if the plugin is disabled between
+        // the onPreXxx and onPostXxx callbacks, the SentinelContext still needs to be
+        // ended to exit the Entry and clean up the ThreadLocal
+        doInContext(this.sentinelOperations::end, true);
     }
 
     protected String getSentinelResourceName(Object entity, String action) {

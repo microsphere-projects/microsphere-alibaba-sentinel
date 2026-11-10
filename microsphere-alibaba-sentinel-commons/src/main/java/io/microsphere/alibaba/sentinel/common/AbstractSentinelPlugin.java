@@ -25,6 +25,13 @@ import static io.microsphere.alibaba.sentinel.common.SentinelPlugin.install;
 
 /**
  * Abstract {@link SentinelPlugin Sentinel Plugin} class
+ * <p>
+ * NOTE : when {@code autoInstalled} is {@code true}, the constructor publishes {@code this}
+ * to the {@link SentinelPluginRepository} before the subclass constructor completes (and thus
+ * before the subclass fields are assigned). Subclasses should either keep their state in the
+ * constructor arguments, or make their extra fields safely visible (e.g., {@code final} or
+ * {@code volatile}) so that the published instance is not observed in a partially-constructed
+ * state by other threads (e.g., the JMX repository iteration).
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @see SentinelPlugin

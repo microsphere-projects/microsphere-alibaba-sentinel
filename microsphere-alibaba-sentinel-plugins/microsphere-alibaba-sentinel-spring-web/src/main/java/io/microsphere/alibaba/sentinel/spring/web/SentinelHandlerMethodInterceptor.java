@@ -22,6 +22,7 @@ import io.microsphere.alibaba.sentinel.common.SentinelOperations;
 import io.microsphere.alibaba.sentinel.common.SentinelPlugin;
 import io.microsphere.alibaba.sentinel.common.SentinelTemplate;
 import io.microsphere.annotation.Nonnull;
+import io.microsphere.annotation.Nullable;
 import io.microsphere.logging.Logger;
 import io.microsphere.spring.web.annotation.EnableWebExtension;
 import io.microsphere.spring.web.event.WebEndpointMappingsReadyEvent;
@@ -67,7 +68,7 @@ public class SentinelHandlerMethodInterceptor extends AbstractSentinelPlugin imp
 
     private int order;
 
-    private Map<Method, String> methodResourceNamesCache;
+    private volatile Map<Method, String> methodResourceNamesCache = newFixedHashMap(256);
 
     public SentinelHandlerMethodInterceptor() {
         this(DEFAULT_CONTEXT_NAME, DEFAULT_ORIGIN);
@@ -130,9 +131,9 @@ public class SentinelHandlerMethodInterceptor extends AbstractSentinelPlugin imp
      * Get the {@link SentinelContext} from {@link NativeWebRequest}
      *
      * @param request {@link NativeWebRequest}
-     * @return the {@link SentinelContext} if found
+     * @return the {@link SentinelContext} if found, or <code>null</code> if not found
      */
-    @Nonnull
+    @Nullable
     public static SentinelContext getSentinelContext(NativeWebRequest request) {
         return REQUEST.getAttribute(request, SENTINEL_CONTEXT_ATTRIBUTE_NAME);
     }

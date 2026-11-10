@@ -22,7 +22,7 @@
 | Branch / released versions | `0.1.6-SNAPSHOT` (`${revision}`) / `0.1.0` – `0.1.5` |
 | Packaging / Java / Since | `jar` / 8 / `1.0.0` for all public types |
 | POM name | `Microsphere :: Alibaba Sentinel :: Commons` |
-| Packages | `io.microsphere.alibaba.sentinel.common` plus `.callback`, `.constants`, `.init`, `.reposistory`, `.util`, and `io.microsphere.alibaba.sentinel.event`, `.jmx` |
+| Packages | `io.microsphere.alibaba.sentinel.common` plus `.callback`, `.constants`, `.init`, `.repository`, `.util`, and `io.microsphere.alibaba.sentinel.event`, `.jmx` |
 
 ## Compatibility
 

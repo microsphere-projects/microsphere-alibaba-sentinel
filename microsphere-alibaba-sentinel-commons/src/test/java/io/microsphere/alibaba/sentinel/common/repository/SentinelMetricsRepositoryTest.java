@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package io.microsphere.alibaba.sentinel.common.reposistory;
+package io.microsphere.alibaba.sentinel.common.repository;
 
 
 import com.alibaba.csp.sentinel.node.metric.MetricNode;
@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import static io.microsphere.alibaba.sentinel.common.constants.SentinelConstants.DEFAULT_CONTEXT_NAME;
-import static io.microsphere.alibaba.sentinel.common.reposistory.SentinelMetricsRepository.getSentinelMetricsRepository;
+import static io.microsphere.alibaba.sentinel.common.repository.SentinelMetricsRepository.getSentinelMetricsRepository;
 import static io.microsphere.alibaba.sentinel.common.util.ProcessorSlotCallbackUtils.addEntryCallback;
 import static java.lang.System.currentTimeMillis;
 import static org.junit.jupiter.api.Assertions.assertEquals;
