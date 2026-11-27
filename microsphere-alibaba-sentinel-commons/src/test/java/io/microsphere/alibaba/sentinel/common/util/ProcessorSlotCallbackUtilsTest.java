@@ -20,7 +20,7 @@ package io.microsphere.alibaba.sentinel.common.util;
 
 import com.alibaba.csp.sentinel.metric.extension.callback.MetricExitCallback;
 import com.alibaba.csp.sentinel.slotchain.ProcessorSlotExitCallback;
-import io.microsphere.alibaba.sentinel.common.reposistory.SentinelMetricsRepository;
+import io.microsphere.alibaba.sentinel.common.repository.SentinelMetricsRepository;
 import io.microsphere.alibaba.sentinel.event.SentinelNodeEventPublisher;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
