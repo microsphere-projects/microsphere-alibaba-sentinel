@@ -45,11 +45,14 @@ public class SimpleSentinelPluginRepository implements SentinelPluginRepository 
 
     @Override
     public boolean install(SentinelPlugin plugin) throws IllegalArgumentException, NullPointerException {
+        if (plugin == null) {
+            throw new NullPointerException("The plugin must not be null");
+        }
         String name = plugin.getName();
         if (this.pluginsRepository.putIfAbsent(name, plugin) == null) {
             return true;
         }
-        logger.warn("{} with name ['{}'] already exists", plugin);
+        logger.warn("The plugin [{}] with name ['{}'] already exists", plugin, name);
         return false;
     }
 
