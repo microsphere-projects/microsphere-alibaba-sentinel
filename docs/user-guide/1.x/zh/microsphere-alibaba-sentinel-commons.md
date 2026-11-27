@@ -22,7 +22,7 @@
 | 分支版本 / 已发布版本 | `0.1.6-SNAPSHOT`（`${revision}`）/ `0.1.0` – `0.1.5` |
 | 打包方式 / Java / 起始版本 | `jar` / 8 / 所有公开类型为 `1.0.0` |
 | POM 名称 | `Microsphere :: Alibaba Sentinel :: Commons` |
-| 包 | `io.microsphere.alibaba.sentinel.common` 以及 `.callback`、`.constants`、`.init`、`.reposistory`、`.util`，还有 `io.microsphere.alibaba.sentinel.event`、`.jmx` |
+| 包 | `io.microsphere.alibaba.sentinel.common` 以及 `.callback`、`.constants`、`.init`、`.repository`、`.util`，还有 `io.microsphere.alibaba.sentinel.event`、`.jmx` |
 
 ## 兼容性
 

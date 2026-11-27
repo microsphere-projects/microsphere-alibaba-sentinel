@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package io.microsphere.alibaba.sentinel.common.reposistory;
+package io.microsphere.alibaba.sentinel.common.repository;
 
 import com.alibaba.csp.sentinel.context.Context;
 import com.alibaba.csp.sentinel.node.DefaultNode;
