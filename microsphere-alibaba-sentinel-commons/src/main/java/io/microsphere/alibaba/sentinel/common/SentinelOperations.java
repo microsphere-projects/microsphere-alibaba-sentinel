@@ -53,8 +53,10 @@ import static io.microsphere.util.ExceptionUtils.throwTarget;
  *      </ul>
  *     </li>
  *     <li>Two-Phase Operations :
+ *        <ul>
  *        <li>{@link #begin(String, String, String) the first phase}</li>
  *        <li>{@link #end(SentinelContext) the second phase}</li>
+ *        </ul>
  *     </li>
  * </ul>
  *

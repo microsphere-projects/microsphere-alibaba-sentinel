@@ -39,7 +39,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <h3>Example Usage</h3>
  * <pre>{@code
  * @Configuration
- * @ConditionalOnSentinelAvailiable
+ * @ConditionalOnSentinelAvailable
  * public class MySentinelConfiguration {
  *     // This configuration will only be active if Sentinel is available
  * }
