@@ -116,6 +116,11 @@ public abstract class SentinelUtils {
     /**
      * Is the plugin enabled ?
      *
+     * <p>The property is read on every invocation, so changing the Java System Property at runtime
+     * changes the result for direct callers. A plugin that caches the value at construction time
+     * (for example one extending <code>AbstractSentinelPlugin</code>) will not observe later changes.
+     * The default is enabled when the property is absent.
+     *
      * @param pluginName the name of plugin
      * @return the <code>true</code> as default, otherwise set the Java System Property to be "false" , is like
      * "microsphere.sentinel.${pluginName}.enabled" = "false"
