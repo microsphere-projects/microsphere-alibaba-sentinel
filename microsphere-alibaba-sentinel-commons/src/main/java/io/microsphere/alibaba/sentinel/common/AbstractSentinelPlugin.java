@@ -24,7 +24,15 @@ import static com.alibaba.csp.sentinel.ResourceTypeConstants.COMMON;
 import static io.microsphere.alibaba.sentinel.common.SentinelPlugin.install;
 
 /**
- * Abstract {@link SentinelPlugin Sentinel Plugin} class
+ * Abstract {@link SentinelPlugin Sentinel Plugin} class.
+ *
+ * <p>NOTE: when {@code autoInstalled} is {@code true}, the constructor publishes
+ * {@code this} to the {@link SentinelPluginRepository} before the subclass
+ * constructor completes, so other threads may observe a partially constructed
+ * instance. Subclasses should keep extra state in constructor arguments, or make
+ * additional fields safely visible (for example {@code final} or {@code volatile}).
+ * Moving the auto-install out of the constructor into a factory method or an
+ * explicit lifecycle callback remains a possible future improvement.
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @see SentinelPlugin
